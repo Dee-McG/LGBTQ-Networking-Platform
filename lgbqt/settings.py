@@ -18,7 +18,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = ['localhost', '127.0.0,1']
+ALLOWED_HOSTS = ['https://8000-daisymcg-lgbtqnetworkin-urc3apbybij.ws-eu99.gitpod.io/', '127.0.0,1']
 
 
 # Application definition
@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'lgbtqnt',
     'home',
 ]
 
