@@ -5,9 +5,9 @@ from .models import Post
 class PostForm(forms.ModelForm):
 
     class Meta:
-        model = BlogPost
+        model = Post
         fields = [
             'date_added',
             'title',
-            'content'
+            'content',
         ]

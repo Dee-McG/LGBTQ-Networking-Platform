@@ -21,7 +21,7 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
 
     context = {
-        'post': prodpostuct,
+        'post': post,
     }
 
     if request.method == 'POST' and request.user.is_authenticated:
