@@ -19,7 +19,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEVELOPMENT' in os.environ
 
 ALLOWED_HOSTS = [os.environ.get("HOST"), '127.0.0.1', 'localhost']
-
+CSRF_TRUSTED_ORIGINS = [os.environ.get("FULLHOST")]
 
 # Application definition
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # Apps
     'home',
+    'profiles',
 ]
 
 MIDDLEWARE = [
