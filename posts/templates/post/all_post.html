@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="all-post-container">
+    <h2>Posts</h2>
+    </p>
+    </div>
+    <div class=" text-center">
+        <a href="{% url 'add_post' %}">
+            <p>Share your thoughs with others</p>
+        </a>
+    </div>
+    {% for post in posts %}
+    <div class="container " style="border: 0.5px solid lightblue;">
+        <h4><a href="{% url 'post_detail' post.id %}" >{{ post.title }}</a></h4>
+       <div style="padding: 5px;">
+        <p>{{ post.content }}</p>
+    
+       </div> 
+    
+    </div>
+    </div>
+
+{% endblock %}
