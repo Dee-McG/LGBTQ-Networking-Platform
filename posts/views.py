@@ -8,9 +8,9 @@ from .forms import PostForm
 
 
 def all_post(request):
-
+    posts = Post.objects.all()
     context = {
-        'post': post,
+        'posts': posts,
     }
 
     return render(request, 'post/post.html', context)
