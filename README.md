@@ -27,6 +27,7 @@ import os
 os.environ["SECRET_KEY"] = "jr43jk5k3j54345m,madsad"
 os.environ["DEVELOPMENT"] = "jr43jk5k3j54345m,madsad"
 os.environ["HOST"] = "8000-daisymcg-lgbtqnetworkin-urc3apbybij.ws-eu99.gitpod.io" <--- Replace this with gitpod url - not needed for vscode ect.
+os.environ["FULLHOST"] = "https://8000-daisymcg-lgbtqnetworkin-urc3apbybij.ws-eu99.gitpod.io" <--- Replace this with gitpod url - not needed for vscode ect.
 ```
 
 Install requirements
