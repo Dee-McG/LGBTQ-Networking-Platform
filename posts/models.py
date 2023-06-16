@@ -9,4 +9,4 @@ class Post(models.Model):
     date_added = models.DateTimeField(auto_now=True)
  
     def __str__(self):
-        return self.name
+        return self.title

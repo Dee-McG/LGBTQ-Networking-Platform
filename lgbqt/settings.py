@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # Apps
     'home',
+    'posts',
+    'djrichtextfield',
     'profiles',
 ]
 

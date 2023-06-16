@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
+from django.contrib.auth.decorators import login_required
 
 from .models import Post
 from .forms import PostForm
@@ -13,7 +14,7 @@ def all_post(request):
         'posts': posts,
     }
 
-    return render(request, 'post/post.html', context)
+    return render(request, 'posts/post.html', context)
 
 def post_detail(request, post_id):
     """ A view to show individual post details """
@@ -28,23 +29,25 @@ def post_detail(request, post_id):
         content = request.POST.get('content', '')
         return redirect('post_detail', post_id=post_id)
 
-    return render(request, 'post/post_detail.html', context)
+    return render(request, 'posts/post_detail.html', context)
 
-
+@login_required
 def add_post(request):
     """ Add  post """
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.author = request.user
             post = form.save()
             messages.success(request, 'Successfully added post!')
-            return redirect(reverse('post_detail', args=[post.id]))
+            return redirect(reverse('post_detail', args=[form.pk]))
         else:
             messages.error(request, 'Failed to add post. Please ensure the form is valid.')
     else:
         form = PostForm()
    
-    template = 'post/add_post.html'
+    template = 'posts/add_post.html'
     context = {
         'form': form,
     }
@@ -67,7 +70,7 @@ def edit_post(request, post_id):
         form = PostForm(instance=post)
         messages.info(request, f'You are editing {post.name}')
 
-    template = 'post/edit_post.html'
+    template = 'posts/edit_post.html'
     context = {
         'form': form,
         'post': post,
