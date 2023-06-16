@@ -18,8 +18,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEVELOPMENT' in os.environ
 
-ALLOWED_HOSTS = [os.environ.get("HOST"), '127.0.0.1', 'localhost']
-
+ALLOWED_HOSTS = ['8000-daisymcg-lgbtqnetworkin-urc3apbybij.ws-eu100.gitpod.io', '127.0.0.1', 'localhost']
+CSRF_TRUSTED_ORIGINS = [os.environ.get("FULLHOST")]
 
 
 # Application definition
