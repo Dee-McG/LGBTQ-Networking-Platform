@@ -1,10 +1,41 @@
 {% extends "base.html" %}
 {% load static %}
-{% block page_header %}
 
+{% block extra_title %}Home{% endblock %}
+ 
+{% block content %}
 
-{% endblock %}
- {% block content %}
-  
+<div class="container">
+    <div class="home-pro">
+    <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                {% if profile.image %}
+                <img src="{{profile.image.url}}" alt="{{request.user.username}}'s profile image">
+                {% else %}
+                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                {% endif %}
+            </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">TBC</p>
+              <p class="subtitle is-6">@{{profile.user.username}}</p>
+            </div>
+          </div>
+      
+          <div class="content">
+            {% if profile.job_title %}
+            {{profile.job_title}}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="home-posts">
+
+    </div>
+</div>
 
 {% endblock %}

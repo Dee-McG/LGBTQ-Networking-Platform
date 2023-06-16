@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_title %}Profile - {{profile.user.username|upper}}{% endblock %}
+
+{% block content %}
 <h1>{{ profile.user.username }}</h1>
 <p>Job Title: {{ profile.job_title }}</p>
 <p>Location: {{ profile.location }}</p>
@@ -81,3 +87,5 @@
         {% endif %}
     {% endif %}
 {% endif %}
+
+{% endblock %}

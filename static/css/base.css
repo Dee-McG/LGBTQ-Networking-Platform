@@ -1,0 +1,25 @@
+.home-pro {
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.home-posts {
+    width: 100%;
+}
+
+/* Navigation */
+
+.nav-pic {
+    height: 25px;
+    width: 25px;
+}
+
+@media screen and (min-width: 800px) {
+    .home-pro {
+        width: 30%;
+    }
+
+    .home-posts {
+        width: 70%;
+    }
+}
