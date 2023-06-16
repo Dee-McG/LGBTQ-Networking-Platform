@@ -1,0 +1,83 @@
+<h1>{{ profile.user.username }}</h1>
+<p>Job Title: {{ profile.job_title }}</p>
+<p>Location: {{ profile.location }}</p>
+<p>About: {{ profile.about }}</p>
+<p>Skills: {{ profile.skills }}</p>
+<p>mentor: {{ profile.mentor }}</p>
+<p>mentor_expertise: {{ profile.mentor_expertise }}</p>
+
+<p>friends:
+    {% for friend in profile.friends.all %}
+      {{ friend.user.username }},
+    {% endfor %}
+</p>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<h2>Friend Request Received</h2>
+{% if user == profile.user %}
+    {% if friend_request_received %}
+        <ul>
+            {% for friend_request in friend_request_received %}
+            <li>{{ friend_request.from_user.user.username }} sent you a friend request</li>
+            <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
+                {% csrf_token %}
+                <button type="submit">Accept</button>
+            </form>
+            <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Deny</button>
+            </form>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}
+
+{% if user != profile.user %}
+    {% if not profile in user.profile.friends.all %}
+        {% if not user.is_superuser %}
+            {% with friend_request=friend_request_received|first %}
+                {% if not friend_request or friend_request.from_user != profile.user %}
+                    {% if not profile in user.profile.sent_requests.all %}
+                        <form method="POST" action="{% url 'send_friend_request' profile.user.username %}">
+                            {% csrf_token %}
+                            <button type="submit">Send request</button>
+                        </form>
+                    {% else %}
+                        <p>You already have a pending friend request sent to this user.</p>
+                    {% endif %}
+                {% else %}
+                    <p>You have received a friend request from this user.</p>
+                    <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Accept</button>
+                    </form>
+                    <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">Deny</button>
+                    </form>
+                {% endif %}
+            {% endwith %}
+        {% else %}
+            <p>You are a superuser and cannot send friend requests.</p>
+        {% endif %}
+    {% else %}
+        {% if not remove_friend_clicked %}
+            <form method="POST" action="{% url 'remove_friend' profile.user.profile.pk %}">
+                {% csrf_token %}
+                <button type="submit">Remove friend</button>
+            </form>
+        {% endif %}
+        {% if remove_friend_clicked %}
+            <p>You have removed this user from your friend list.</p>
+        {% else %}
+            <p>You are friends with this user.</p>
+        {% endif %}
+    {% endif %}
+{% endif %}
