@@ -25,4 +25,5 @@ urlpatterns = [
         'profile/remove-friend/<int:friend_id>/',
         remove_friend,
         name='remove_friend'),
+    path('profile/edit/', ProfileView.as_view(), name='profile_edit'),
 ]
