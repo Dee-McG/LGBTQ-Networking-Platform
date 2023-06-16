@@ -1,9 +1,14 @@
+from typing import Optional
+from django.forms.models import BaseModelForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from .models import Profile, FriendRequest
+#from .models import ProfileForm
+from .forms import ProfileForm
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 from django.http import HttpResponse
 
@@ -101,3 +106,16 @@ class ProfileView(TemplateView):
         profile.send_friend_request(friend_profile.user)
 
         return redirect('profile', pk=profile.pk)
+
+
+class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """Edit a profile"""
+    form_class = ProfileForm
+    model = Profile
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        self.success_url = f'/profile/view/{self.kwargs["pk"]}'
+        return super().form_valid(form)
+    
+    def test_func(self) -> bool | None:
+        return self.request.user == self.get_object().user
