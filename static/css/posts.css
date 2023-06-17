@@ -1,0 +1,16 @@
+.post-container{
+    margin: auto;
+    width: 50%;
+    border: 2px solid rgb(255, 196, 0);
+    padding: 5px;
+    border-radius: 10px;
+  
+}
+
+.title-heading{
+    text-align: center;
+}
+
+.content-container{
+    text-align: center;
+}
