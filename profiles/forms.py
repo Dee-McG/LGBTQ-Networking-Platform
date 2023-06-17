@@ -1,17 +1,37 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Profile
 
 
 class ProfileForm(forms.ModelForm):
-    """form to create a profile"""
+    """Form to create/edit a profile"""
+    first_name = forms.CharField(max_length=30, required=False)
+    last_name = forms.CharField(max_length=30, required=False)
+
     class Meta:
         model = Profile
-        fields = ['job_title', 'location', 'about', 'skills', 'image']
-
+        fields = [
+            'first_name',
+            'last_name',
+            'job_title',
+            'location',
+            'about',
+            'skills',
+            'image',
+            ]
         labels = {
-            "job_title": "Job title",
+            "first_name": "First Name",
+            "last_name": "Last Name",
+            "job_title": "Job Title",
             "location": "Location",
             "about": "About",
             "skills": "Skills",
-            "Profile Picture": "image"
+            "image": "Profile Picture"
         }
+
+    def save(self, commit=True):
+        user = self.instance.user
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.save()
+        return super().save(commit=commit)
