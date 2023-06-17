@@ -25,13 +25,15 @@
           <div class="navbar-end">
             <div class="navbar-item">
               {% if request.user.is_authenticated %}
+              {% if request.user.profile.image %}
               <a href="{% url 'profile' request.user.id %}">
-                <img src="{% static '/icons/person.svg' %}" alt="Default image picture" class="nav-pic">
+                <img src="{{profile.image.url}}" alt="{{request.user.username}}'s profile image" class="nav-pic">
               </a>
               {% else %}
               <a href="{% url 'profile' request.user.id %}">
-                <img src="{{profile.img.url}}" alt="{{request.user.username}}'s profile image" class="nav-pic">
+                <img src="{% static '/icons/person.svg' %}" alt="Default image picture" class="nav-pic">
               </a>
+              {% endif %}
               {% endif %}
             </div>
             <div class="navbar-item">
