@@ -18,7 +18,10 @@
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <a class="navbar-item" href="{% url 'home' %}">
-              Home
+              <img src="{% static '/icons/home.svg' %}" alt="Home Icon" class="nav-pic">
+            </a>
+            <a class="navbar-item" href="{% url 'groups' %}">
+              <img src="{% static '/icons/group.svg' %}" alt="Group Icon" class="nav-pic">
             </a>
           </div>
       
@@ -27,7 +30,7 @@
               {% if request.user.is_authenticated %}
               {% if request.user.profile.image %}
               <a href="{% url 'profile' request.user.id %}">
-                <img src="{{profile.image.url}}" alt="{{request.user.username}}'s profile image" class="nav-pic">
+                <img src="{{ request.user.profile.image.url }}" alt="{{request.user.username}}'s profile image" class="nav-pic">
               </a>
               {% else %}
               <a href="{% url 'profile' request.user.id %}">

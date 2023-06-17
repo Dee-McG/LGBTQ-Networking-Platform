@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Apps
     'home',
     'profiles',
+    'groups',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
