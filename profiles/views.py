@@ -126,5 +126,5 @@ class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         self.success_url = f'/profile/user/{self.kwargs["pk"]}/'
         return super().form_valid(form)
     
-    # def test_func(self) -> bool | None:
-    #     return self.request.user == self.get_object().user
+    def test_func(self):
+        return self.request.user == self.get_object().user
