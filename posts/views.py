@@ -14,7 +14,7 @@ def all_post(request):
         'posts': posts,
     }
 
-    return render(request, 'posts/post.html', context)
+    return render(request, 'posts/all_post.html', context)
 
 def post_detail(request, post_id):
     """ A view to show individual post details """

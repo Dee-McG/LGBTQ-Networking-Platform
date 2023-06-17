@@ -17,10 +17,9 @@
     <h4><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h4>
     <div style="padding: 5px;">
         <p>{{ post.content }}</p>
-
     </div>
-
 </div>
+{%endfor%}
 </div>
 
 {% endblock %}

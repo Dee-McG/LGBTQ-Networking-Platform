@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     # Apps
     'home',
     'posts',
-    'djrichtextfield',
     'profiles',
+    
 ]
 
 MIDDLEWARE = [
