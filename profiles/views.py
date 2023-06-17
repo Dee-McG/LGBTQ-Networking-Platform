@@ -79,20 +79,19 @@ def remove_friend(request, friend_id):
     return redirect('profile', pk=user_profile.pk)
 
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
     """User Profile View"""
     template_name = "profile.html"
 
     def get_context_data(self, **kwargs):
-        profile = Profile.objects.get(user=self.kwargs["pk"])
-        friend_request_received = profile.received_friend_requests.all()
-        friend_request_sent = (
-            profile in self.request.user.profile.sent_friend_requests.all()
-            )
+        profile = None
+        friend_request_received = None
+        if self.request.user.is_authenticated:
+            profile = Profile.objects.get(user=self.kwargs["pk"])
+            friend_request_received = profile.received_friend_requests.all()
         context = {
             'profile': profile,
             'friend_request_received': friend_request_received,
-            'friend_request_sent': friend_request_sent,
             'form': ProfileForm(instance=profile)
         }
         return context

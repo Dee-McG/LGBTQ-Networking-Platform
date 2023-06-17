@@ -21,7 +21,13 @@ class Profile(models.Model):
         null=True,
         default='Unspecified'
         )
-    image = ResizedImageField(size=[300, 300], quality=75, upload_to="profiles/", force_format='WEBP', blank=True)
+    image = ResizedImageField(
+        size=[300, 300],
+        quality=75,
+        upload_to="profiles/",
+        force_format='WEBP',
+        blank=True
+        )
     location = models.CharField(
         max_length=100,
         null=True,
