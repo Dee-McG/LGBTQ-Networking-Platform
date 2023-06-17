@@ -9,5 +9,5 @@ urlpatterns = [
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('', include('home.urls')),
     path('profile/', include('profiles.urls')),
-    
+    path('groups/', include('groups.urls')),
 ]
