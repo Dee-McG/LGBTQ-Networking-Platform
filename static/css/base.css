@@ -14,6 +14,33 @@
     width: 25px;
 }
 
+/* Forms */
+
+.form {
+    padding: 2rem;
+    background-color: #00d1b21c;
+}
+
+.modal-content {
+    margin: 1rem;
+}
+
+.no-style {
+    border: none;
+    background-color: inherit
+}
+
+#myBtn {
+    display: flex;
+    width: 31px;
+}
+
+/* Profiles */
+
+.title.is-4 {
+    display: flex;
+}
+
 @media screen and (min-width: 800px) {
     .home-pro {
         width: 30%;
