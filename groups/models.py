@@ -21,4 +21,4 @@ class Group(models.Model):
         ordering = ['group_name']
 
     def __str__(self):
-        return self.club_name
+        return self.group_name
