@@ -28,24 +28,32 @@
   <script src="https://kit.fontawesome.com/2ecf9218d5.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   {% endblock %}
 
-  {% block extra_js %}
-  {% endblock %}
-
-  <title>LGBTQ {% block extra_title %}{% endblock %}</title>
+  <title>LGBTQ - {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>
 
   {% include 'includes/header.html' %}
 
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
   <main>
   {% block content %}
   {% endblock %}
   </main>
 
+  <script src="{% static 'js/script.js' %}"></script>
+  {% block extra_js %} 
+  {% endblock %}
 </body>
 
 </html>

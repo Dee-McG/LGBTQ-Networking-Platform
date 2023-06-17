@@ -4,11 +4,13 @@ from .views import (
     send_friend_request,
     accept_friend_request,
     deny_friend_request,
-    remove_friend
+    remove_friend,
+    EditProfile
     )
 
 urlpatterns = [
     path('user/<slug:pk>/', ProfileView.as_view(), name="profile"),
+    path('edit/<int:pk>/', EditProfile.as_view(), name='profile_edit'),
     path(
         'send-friend-request/<str:username>/',
         send_friend_request,
@@ -25,5 +27,4 @@ urlpatterns = [
         'profile/remove-friend/<int:friend_id>/',
         remove_friend,
         name='remove_friend'),
-    path('profile/edit/', ProfileView.as_view(), name='profile_edit'),
 ]

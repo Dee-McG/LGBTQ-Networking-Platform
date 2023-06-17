@@ -1,10 +1,51 @@
-<h1>{{ profile.user.username }}</h1>
-<p>Job Title: {{ profile.job_title }}</p>
-<p>Location: {{ profile.location }}</p>
-<p>About: {{ profile.about }}</p>
-<p>Skills: {{ profile.skills }}</p>
-<p>mentor: {{ profile.mentor }}</p>
-<p>mentor_expertise: {{ profile.mentor_expertise }}</p>
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block extra_title %}Profile - {{profile.user.username|upper}}{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-content">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-48x48">
+            {% if profile.image %}
+            <img src="{{profile.image.url}}" alt="{{request.user.username}}'s profile image">
+            {% else %}
+            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+            {% endif %}
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-4">
+            John Smith
+            {% if request.user == profile.user %}
+            <!-- Trigger/Open The Modal -->
+            <button id="myBtn" class="no-style" aria-label="Edit Profile Page">
+                <img src="{% static '/icons/edit.svg' %}" alt="Edit image picture" class="nav-pic">
+            </button>
+        {% endif %}
+          </p>
+          <p class="subtitle is-6">@{{profile.user.username}}</p>
+        </div>
+      </div>
+  
+      <div class="content">
+        {% if profile.job_title != 'Unspecified' %}
+        <p>
+            <strong>{{profile.job_title}}</strong>
+            {% if profile.location != 'Unspecified' %}
+             - {{profile.location}}
+            {% endif %}
+        </p>
+        {% endif %}
+        {% if profile.about %}
+        {{profile.about|safe}}
+        {% endif %}
+      </div>
+    </div>
+  </div>
 
 <p>friends:
     {% for friend in profile.friends.all %}
@@ -12,13 +53,6 @@
     {% endfor %}
 </p>
 
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
 
 <h2>Friend Request Received</h2>
 {% if user == profile.user %}
@@ -81,3 +115,53 @@
         {% endif %}
     {% endif %}
 {% endif %}
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form method="POST" action="{% url 'profile_edit' request.user.id %}" class="form"
+            enctype="multipart/form-data">
+            <h1 class="title text-center fs-4">Edit Profile</h1>
+            {% csrf_token %}
+            {{ form|crispy }}
+            {{ form.media }}
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="button primary">Edit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %} 
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+{% endblock %}
