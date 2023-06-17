@@ -19,7 +19,7 @@
         </div>
         <div class="media-content">
           <p class="title is-4">
-            John Smith
+            {{ profile.user.first_name }} {{ profile.user.last_name }}
             {% if request.user == profile.user %}
             <!-- Trigger/Open The Modal -->
             <button id="myBtn" class="no-style" aria-label="Edit Profile Page">
@@ -32,46 +32,59 @@
       </div>
   
       <div class="content">
-        {% if profile.job_title != 'Unspecified' %}
-        <p>
-            <strong>{{profile.job_title}}</strong>
-            {% if profile.location != 'Unspecified' %}
-             - {{profile.location}}
-            {% endif %}
+        <p>Friends:
+          <button class="button is-text is-small" id="friendListToggle">Show/Hide</button>
         </p>
-        {% endif %}
-        {% if profile.about %}
-        {{profile.about|safe}}
-        {% endif %}
+        <ul id="friendList" class="is-hidden">
+          {% for friend in profile.friends.all %}
+            <li class="is-flex is-align-items-center is-justify-content-space-between">
+              <div class="is-flex is-align-items-center">
+                <figure class="image is-32x32">
+                  {% if friend.profile.image %}
+                    <img src="{{ friend.profile.image.url }}" alt="{{ friend.user.username }}'s profile picture" class="is-rounded">
+                  {% else %}
+                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" class="is-rounded">
+                  {% endif %}
+                </figure>
+                <div class="ml-2">
+                  <p class="mb-1">
+                    <strong>{{ friend.user.username }}</strong>
+                  </p>
+                  <p class="mb-1">
+                    <strong>Job Title:</strong> {{ friend.user.profile.job_title }}
+                  </p>
+                  <p class="mb-1">
+                    <strong>Location:</strong> {{ friend.user.profile.location }}
+                  </p>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
-  </div>
+</div>
 
-<p>friends:
-    {% for friend in profile.friends.all %}
-      {{ friend.user.username }},
-    {% endfor %}
-</p>
-
-
-<h2>Friend Request Received</h2>
-{% if user == profile.user %}
-    {% if friend_request_received %}
-        <ul>
-            {% for friend_request in friend_request_received %}
-            <li>{{ friend_request.from_user.user.username }} sent you a friend request</li>
-            <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
-                {% csrf_token %}
-                <button type="submit">Accept</button>
-            </form>
-            <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">Deny</button>
-            </form>
-            {% endfor %}
-        </ul>
+<div class="section">
+    <h2 class="subtitle">Friend Request Received</h2>
+    {% if user == profile.user %}
+        {% if friend_request_received %}
+            <ul class="notification">
+                {% for friend_request in friend_request_received %}
+                <li>{{ friend_request.from_user.user.username }} sent you a friend request</li>
+                <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
+                    {% csrf_token %}
+                    <button class="button is-success is-small" type="submit">Accept</button>
+                </form>
+                <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="button is-danger is-small" type="submit">Deny</button>
+                </form>
+                {% endfor %}
+            </ul>
+        {% endif %}
     {% endif %}
-{% endif %}
+</div>
 
 {% if user != profile.user %}
     {% if not profile in user.profile.friends.all %}
@@ -81,7 +94,7 @@
                     {% if not profile in user.profile.sent_requests.all %}
                         <form method="POST" action="{% url 'send_friend_request' profile.user.username %}">
                             {% csrf_token %}
-                            <button type="submit">Send request</button>
+                            <button class="button is-primary is-small" type="submit">Send request</button>
                         </form>
                     {% else %}
                         <p>You already have a pending friend request sent to this user.</p>
@@ -90,11 +103,11 @@
                     <p>You have received a friend request from this user.</p>
                     <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
                         {% csrf_token %}
-                        <button type="submit">Accept</button>
+                        <button class="button is-success is-small" type="submit">Accept</button>
                     </form>
                     <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
                         {% csrf_token %}
-                        <button type="submit">Deny</button>
+                        <button class="button is-danger is-small" type="submit">Deny</button>
                     </form>
                 {% endif %}
             {% endwith %}
@@ -105,7 +118,7 @@
         {% if not remove_friend_clicked %}
             <form method="POST" action="{% url 'remove_friend' profile.user.profile.pk %}">
                 {% csrf_token %}
-                <button type="submit">Remove friend</button>
+                <button class="button is-danger is-small" type="submit">Remove friend</button>
             </form>
         {% endif %}
         {% if remove_friend_clicked %}
@@ -138,30 +151,39 @@
 
 {% block extra_js %} 
 <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-    
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-    
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-    
-    // When the user clicks on the button, open the modal
-    btn.onclick = function () {
-        modal.style.display = "block";
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
-    
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-    
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+  }
+  
+  // To open and close the friends list
+  const friendListToggle = document.getElementById('friendListToggle');
+  const friendList = document.getElementById('friendList');
+  
+  friendListToggle.addEventListener('click', function() {
+    friendList.classList.toggle('is-hidden');
+  });
 </script>
 {% endblock %}
+
