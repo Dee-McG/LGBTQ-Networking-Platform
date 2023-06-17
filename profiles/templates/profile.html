@@ -28,6 +28,12 @@
         {% endif %}
           </p>
           <p class="subtitle is-6">@{{profile.user.username}}</p>
+          <div class="media-content">
+            <p class="subtitle is-4">Skills: {{profile.skills}}</p>
+          </div>
+          <div class="media-content">
+            <p class="subtitle is-4">{{profile.about|safe}}</p>
+          </div>
         </div>
       </div>
   
@@ -48,7 +54,7 @@
                 </figure>
                 <div class="ml-2">
                   <p class="mb-1">
-                    <strong>{{ friend.user.username }}</strong>
+                    <a href="{% url 'profile' friend.user.id %}" class="has-text-black">{{ friend.user.username }}</a>
                   </p>
                   <p class="mb-1">
                     <strong>Job Title:</strong> {{ friend.user.profile.job_title }}
