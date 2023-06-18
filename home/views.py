@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from profiles.models import Profile
 
-
 class IndexView(LoginRequiredMixin, TemplateView):
     """Home Page View"""
     template_name = 'home/index.html'
@@ -13,3 +12,4 @@ class IndexView(LoginRequiredMixin, TemplateView):
             "profile": Profile.objects.get(user=self.request.user)
         }
         return context
+    

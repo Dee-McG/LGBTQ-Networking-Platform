@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Search results</h1>
+
+    {% for result in search_results %}
+        <div>
+            <h2>{{ result.title }}</h2>  <!-- You'll need to customize these lines -->
+            <p>{{ result.description }}</p>  <!-- based on your actual models. -->
+        </div>
+    {% empty %}
+        <p>No results found.</p>
+    {% endfor %}
+{% endblock %}
