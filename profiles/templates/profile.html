@@ -96,17 +96,14 @@
                     <div class="is-flex is-align-items-center">
                         <figure class="image is-32x32">
                             {% if friend.profile.image %}
-                            <img src="{{ friend.profile.image.url }}" alt="{{ friend.user.username }}'s profile picture"
-                                class="is-rounded">
+                            <img src="{{ friend.profile.image.url }}" alt="{{ friend.user.username }}'s profile picture" class="is-rounded">
                             {% else %}
-                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image"
-                                class="is-rounded">
+                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" class="is-rounded">
                             {% endif %}
                         </figure>
                         <div class="ml-2">
                             <p class="mb-1">
-                                <a href="{% url 'profile' pk=friend.user.id %}" class="has-text-black">{{
-                                    friend.user.username }}</a>
+                                <a href="{% url 'profile' pk=friend.user.id %}" class="has-text-black">{{friend.user.username }}</a>
                             </p>
                             <p class="mb-1">
                                 <strong>Job Title:</strong> {{ friend.user.profile.job_title }}
