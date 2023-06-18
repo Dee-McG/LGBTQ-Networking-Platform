@@ -12,7 +12,6 @@ from .models import Group, GroupPost, GroupComments
 from .forms import GroupForm, GroupPostForm, GroupCommentForm
 
 
-
 class GroupsView(LoginRequiredMixin, ListView):
     """ A view to return groups """
     template_name = "groups/groups.html"
@@ -44,7 +43,7 @@ class CreateGroup(LoginRequiredMixin, CreateView):
         return super(CreateGroup, self).form_valid(form)
 
 
-class GroupDetail(DetailView):
+class GroupDetail(LoginRequiredMixin, DetailView):
     """Group View"""
     template_name = 'groups/view.html'
     model = Group
