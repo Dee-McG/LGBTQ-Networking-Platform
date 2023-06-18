@@ -50,6 +50,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -183,7 +184,10 @@ DJRICHTEXTFIELD_CONFIG = {
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+if 'DEVELOPMENT' in os.environ:
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Cloudinary storage set up
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
