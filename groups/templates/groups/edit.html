@@ -5,4 +5,16 @@
 {% block extra_title %}Edit Group{% endblock %}
 
 {% block content %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data" class="p-2 form">
+        <h1 class="text-center">Edit Group</h1>
+        {% csrf_token %}
+        {{ form.media }} 
+        {{ form|crispy }}
+        <div class="buttons text-center">
+            <button type="submit" class="button is-primary mr-2">Edit</button>
+            <a href="/groups/view/{{group.id}}" class="button is-primary mr-2">Cancel</a>
+        </div>
+    </form>
+</div>
 {% endblock %}
