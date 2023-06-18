@@ -16,6 +16,11 @@ class Profile(models.Model):
         related_name="profile",
         on_delete=models.CASCADE
         )
+    pronouns = models.CharField(
+        max_length=100,
+        null=True,
+        default='Unspecified'
+        )
     job_title = models.CharField(
         max_length=100,
         null=True,
