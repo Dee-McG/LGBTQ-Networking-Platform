@@ -5,9 +5,9 @@
 {% block extra_title %}Profile - {{profile.user.username|upper}}{% endblock %}
 
 {% block content %}
-<div class="card">
+<div class="card p-4">
     <div class="card-content">
-        <div class="media-content">
+        <div class="media-content mb-2">
             {% if user != profile.user %}
             {% if not profile in user.profile.friends.all %}
             {% if not user.is_superuser %}
@@ -69,23 +69,23 @@
                 </p>
                 <p class="subtitle is-6">@{{profile.user.username}}</p>
                 <p class="subtitle is-6">{{profile.pronouns}}</p>
-                {% if profile.skills %}
-                <div class="media-content">
-                    <p class="subtitle is-4">Skills:</p>
-                    <div class="projcard-tagbox">
-                        {% for skill in profile.skills_as_list %}
-                        <span class="projcard-tag mt-1">{{skill}}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
                 {% if profile.mentor %}
-                <p class="subtitle is-4">Mentor: {{profile.mentor}}</p>
-                <p class="subtitle is-4">Mentor Expertise: {{profile.mentor_expertise}}</p>
+                <strong style="border: 1px solid lightgray; padding: 2px 4px; background-color: lightgray;">Mentor</strong>
+                <p class="subtitle is-small">Mentor Expertise: {{profile.mentor_expertise}}</p>
                 {% endif %}
                 <div class="media-content">
                     <p class="subtitle is-4">{{profile.about|safe}}</p>
                 </div>
+                {% if profile.skills %}
+                <div class="media-content">
+                    <p class="subtitle is-small">Skills:</p>
+                    <div class="projcard-tagbox">
+                        {% for skill in profile.skills_as_list %}
+                        <span class="projcard-tag mt-1" style="border: 1px solid lightgray; padding: 2px 4px; background-color: lightgray;">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
       </div>
