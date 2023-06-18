@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'djrichtextfield',
     # allauth setup
     'allauth',
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
     'groups',
     
 ]
+
+SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
