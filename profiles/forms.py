@@ -19,6 +19,8 @@ class ProfileForm(forms.ModelForm):
             'about',
             'skills',
             'image',
+            'mentor',
+            'mentor_expertise',
             ]
         labels = {
             "first_name": "First Name",
@@ -28,7 +30,9 @@ class ProfileForm(forms.ModelForm):
             "location": "Location",
             "about": "About",
             "skills": "Skills",
-            "image": "Profile Picture"
+            "image": "Profile Picture",
+            'mentor': 'Mentor',
+            'mentor_expertise': "Mentor Expertise",
         }
 
     def save(self, commit=True):

@@ -79,6 +79,10 @@
                     </div>
                 </div>
                 {% endif %}
+                {% if profile.mentor %}
+                <p class="subtitle is-4">Mentor: {{profile.mentor}}</p>
+                <p class="subtitle is-4">Mentor Expertise: {{profile.mentor_expertise}}</p>
+                {% endif %}
                 <div class="media-content">
                     <p class="subtitle is-4">{{profile.about|safe}}</p>
                 </div>
