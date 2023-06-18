@@ -117,7 +117,7 @@ def add_comment(request):
         form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save(commit=False)
-            form.author = request.user
+            form.post = request.user
             comment = form.save()
             messages.success(request, 'Successfully added comment!')
             return redirect(reverse('comment_detail', args=[form.pk]))
