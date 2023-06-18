@@ -106,7 +106,8 @@
                         </div>
                     </div>
                     {% if request.user == profile.user %}
-                        <form method="POST" action="{% url 'remove_friend' profile.user.profile.pk %}">
+                        <form method="POST" action="{% url 'remove_friend' friend.user.profile.pk %}">
+
                             {% csrf_token %}
                             <button class="button is-danger is-small" type="submit">Remove Friend</button>
                         </form>
