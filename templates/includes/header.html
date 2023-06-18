@@ -25,9 +25,9 @@
         </a>
         <!-- Search form -->
         <div class="navbar-item">
-          <form method="get" action="{% url 'search' %}">
-            <input type="search" name="q" placeholder="Search" aria-label="Search">
-            <button class="buttons" type="submit">Search</button>
+          <form method="get" action="{% url 'search' %}" class="search">
+            <input type="search" name="q" placeholder="Find Users" aria-label="Search" class="form-control">
+            <button type="submit" class="search-icon"><img src="{% static '/icons/search.svg' %}" alt="Search Icon" class="nav-pic"></button>
           </form>
         </div>
       </div>

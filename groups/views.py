@@ -39,6 +39,7 @@ class CreateGroup(LoginRequiredMixin, CreateView):
         """
         form.instance.owner = self.request.user
         form.save()
+        form.instance.members.add(self.request.user)
         self.success_url = f'/groups/'
         return super(CreateGroup, self).form_valid(form)
 
