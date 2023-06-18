@@ -13,6 +13,7 @@ class ProfileForm(forms.ModelForm):
         fields = [
             'first_name',
             'last_name',
+            'pronouns',
             'job_title',
             'location',
             'about',
@@ -22,6 +23,7 @@ class ProfileForm(forms.ModelForm):
         labels = {
             "first_name": "First Name",
             "last_name": "Last Name",
+            "pronouns": "Pronouns",
             "job_title": "Job Title",
             "location": "Location",
             "about": "About",

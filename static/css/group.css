@@ -1,0 +1,36 @@
+.media {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment {
+    padding: 1rem;
+    margin: 2rem;
+    -webkit-box-shadow: 0px 0px 8px -4px rgba(0,0,0,0.52);
+    -moz-box-shadow: 0px 0px 8px -4px rgba(0,0,0,0.52);
+    box-shadow: 0px 0px 8px -4px rgba(0,0,0,0.52);
+}
+
+.reply-box {
+    padding: 1rem;
+    margin: 2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+.comment-text:hover {
+    cursor: pointer;
+}
+
+.max-img-size {
+    width: 300px;
+    height: auto;
+}
+
+@media screen and (min-width: 800px) {
+    .media {
+        flex-direction: row;
+    }
+}
