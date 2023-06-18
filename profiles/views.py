@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile, FriendRequest
 from .forms import ProfileForm
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from .models import Profile
+from posts.models import Post
 
 
 from django.http import HttpResponse
@@ -148,15 +148,11 @@ class SearchView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-
         if query:
-            profiles = Profile.object.filter(
-                 Q(user__username__icontains=query)
+            users = User.objects.filter(
+                Q(username__icontains=query) |
+                Q(first_name__icontains=query)
             )
-            posts = Post.objects.filter(title__icontains=query)
-            return profiles.union(posts)
-        
-        else:
-            users = self.model.objects.all()
+
             return users
 

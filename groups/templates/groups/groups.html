@@ -3,5 +3,23 @@
 
 {% block extra_title %}View Groups{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/group.css' %}">
+{% endblock %}
+
 {% block content %}
+<div class="container mt-5 card">
+    <section class="section">
+        <h1 class="text-center title mb-2">Explore Groups</h1>
+        <div class="text-center">
+            <a href="{% url 'create_group' %}" class="text-center button is-primary mb-4">New Group</a>
+        </div>
+
+        {% for group in groups %}
+        <h2 class="subtitle">
+         <a href="{% url 'view_group' group.pk %}">{{group.group_name}}</a>
+        </h2>
+        {% endfor %}
+    </section>
+</div>
 {% endblock %}
