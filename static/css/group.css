@@ -24,6 +24,11 @@
     cursor: pointer;
 }
 
+.max-img-size {
+    width: 300px;
+    height: auto;
+}
+
 @media screen and (min-width: 800px) {
     .media {
         flex-direction: row;

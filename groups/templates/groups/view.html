@@ -65,6 +65,11 @@
         <div class="post">
             <div><strong>{{post.user}}</strong> - {{post.posted_date}}</div>
             {{post.post|safe}}
+            <figure class="image max-img-size">
+                {% if post.image %}
+                <img src="{{post.image.url}}">
+                {% endif %}
+            </figure>
         </div>
         <hr>
         <p class="comment-text-{{post.id}} text-center"><strong>Comments ({{ post.post_comment.count}})</strong></p>
