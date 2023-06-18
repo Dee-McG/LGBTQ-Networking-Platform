@@ -3,13 +3,17 @@ from django.forms.models import BaseModelForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, UpdateView, ListView
 from django.contrib.auth.decorators import login_required
 from .models import Profile, FriendRequest
 from .forms import ProfileForm
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from .models import Profile
+
 
 from django.http import HttpResponse
+
+from django.db.models import Q
 
 # Create your views here.
 
@@ -135,3 +139,24 @@ class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         return self.request.user == self.get_object().user
+    
+
+class SearchView(ListView):
+    """Search for a profile"""
+    template_name = 'search_results.html'
+    context_object_name = 'search_results'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+
+        if query:
+            profiles = Profile.object.filter(
+                 Q(user__username__icontains=query)
+            )
+            posts = Post.objects.filter(title__icontains=query)
+            return profiles.union(posts)
+        
+        else:
+            users = self.model.objects.all()
+            return users
+

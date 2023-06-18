@@ -5,7 +5,8 @@ from .views import (
     accept_friend_request,
     deny_friend_request,
     remove_friend,
-    EditProfile
+    EditProfile,
+    SearchView
     )
 
 urlpatterns = [
@@ -27,4 +28,5 @@ urlpatterns = [
         'profile/remove-friend/<int:friend_id>/',
         remove_friend,
         name='remove_friend'),
+    path('search/', SearchView.as_view(), name='search'),    
 ]
