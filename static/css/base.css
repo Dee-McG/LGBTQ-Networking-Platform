@@ -40,6 +40,16 @@ body {
     display: flex;
 }
 
+.search {
+    display: flex;
+    flex-direction: row;
+}
+
+.search-icon {
+    background-color: transparent;
+    border: none;
+}
+
 /* Profiles */
 
 .title.is-4 {

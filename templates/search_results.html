@@ -1,14 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_title %}Search Results{% endblock %}
 
 {% block content %}
+<div class="container mt-3">
     <h1>Search results</h1>
 
-    {% for result in search_results %}
-        <div>
-            <h2>{{ result.title }}</h2>  <!-- You'll need to customize these lines -->
-            <p>{{ result.description }}</p>  <!-- based on your actual models. -->
+    <h2>Users</h2>
+    {% for user in search_results %}
+        <div class="card-content p-2 mb-2">
+            <p><a href="{% url 'profile' user.id %}"><strong>@{{ user.username }}</strong></a></p>
+            {% if user.first_name and user.last_name %}
+            <span style="display: block;"><strong>{{ user.first_name }} {{ user.last_name }}</strong></span>
+            {% endif %}
+            <span>Job Title: {{ user.profile.job_title }}</span>
         </div>
     {% empty %}
         <p>No results found.</p>
     {% endfor %}
+</div>
 {% endblock %}

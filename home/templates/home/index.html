@@ -24,7 +24,7 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">TBC</p>
+            <p class="title is-4">{{ profile.user.first_name }} {{ profile.user.last_name }}</p>
             <p class="subtitle is-6">@{{profile.user.username}}</p>
           </div>
         </div>
@@ -41,62 +41,200 @@
     <button class="button is-primary" id="myBtn">
       <strong>Create Post</strong>
     </button>
-  </div>
+    <!-- Post List -->
+    <div class="post-list p-4">
+      {% for post in posts %}
+      <div class="post {% cycle 'post-white' 'post-gray' %} p-2">
+        <div class="post-header">
+          <div class="post-author">
+            <img class="post-author-image" src="{% if post.author.profile.image %}{{ post.author.profile.image.url }}{% else %}https://bulma.io/images/placeholders/96x96.png{% endif %}" alt="{{ post.author.username }}'s profile image">
+            <div class="post-author-info">
+              <p class="post-author-name">{{ post.author.get_full_name }}</p>
+              <p class="post-author-username">@{{ post.author.username }}</p>
+            </div>
+          </div>
+          <div class="post-date">{{ post.created_at }}</div>
+        </div>
+        <div class="post-content">{{ post.content }}</div>
 
-    <!-- The Modal -->
-<div id="myModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-      <span class="close">&times;</span>
-      <form method="POST" action="{% url 'profile_edit' request.user.id %}" class="form"
-          enctype="multipart/form-data">
-          <h1 class="title text-center fs-4">Create Post</h1>
+        {% if post.author == request.user %}
+        <div class="post-actions">
+          <button class="button is-small is-danger" onclick="deletePost({{ post.id }})">Delete</button>
+          <button class="button is-small is-primary" onclick="openEditModal({{ post.id }}, '{{ post.title|escapejs }}', '{{ post.content|escapejs }}')">Edit</button>
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="postForm" method="POST" action="{% url 'posts:add_post' %}" class="form" enctype="multipart/form-data">
           {% csrf_token %}
+          <h1 class="title text-center fs-4">Create Post</h1>
           {{ form|crispy }}
           {{ form.media }}
           <div class="d-flex justify-content-center">
-              <button type="submit" class="button primary">Post</button>
+            <button type="button" id="postButton" class="button primary">Post</button>
           </div>
-      </form>
+        </form>
+      </div>
+    </div>
+
+          <!-- Edit Modal -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <span class="closeEdit">&times;</span>
+          <form id="editForm" method="POST" action="" class="form">
+            {% csrf_token %}
+            <h1 class="title text-center fs-4">Edit Post</h1>
+            <div class="field">
+              <label class="label">Title</label>
+              <div class="control">
+                <input type="text" name="title" class="input" required>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Content</label>
+              <div class="control">
+                <textarea name="content" class="textarea" required></textarea>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="button" id="updateButton" class="button primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
   </div>
 </div>
 
 {% endblock %}
 
-{% block extra_js %} 
+{% block extra_js %}
 <script>
-  // Get the modal
-  var modal = document.getElementById("myModal");
-  
-  // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
-  
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-  
-  // When the user clicks on the button, open the modal
-  btn.onclick = function() {
-    modal.style.display = "block";
-  }
-  
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target === modal) {
     modal.style.display = "none";
   }
-  
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
+};
+
+// Add an event listener to the "Post" button
+document.getElementById("postButton").addEventListener("click", function () {
+  savePost();
+});
+
+// Function to save the post and perform additional actions
+function savePost() {
+  // Your code to save the post goes here
+
+  // Close the modal
+  modal.style.display = "none";
+
+  // Reload the page by redirecting to the same URL
+  window.location.href = window.location.href;
+}
+
+
+
+// Submit the form using AJAX, close the modal, and refresh the post list
+document.getElementById("postButton").addEventListener("click", function () {
+  var form = document.getElementById("postForm");
+  var formData = new FormData(form);
+
+  // Perform the AJAX request
+  var xhr = new XMLHttpRequest();
+  xhr.open(form.method, form.action, true);
+  xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      form.reset(); // Reset the form fields
+      modal.style.display = "none"; // Close the modal
+      window.location.reload(); // Reload the home page
+    } else {
+      // Handle errors if needed
+    }
+  };
+  xhr.send(formData);
+});
+
+// When the user clicks on the "Edit" button, open the edit modal
+function openEditModal(postId, title, content) {
+  var modal = document.getElementById("editModal");
+  var form = document.getElementById("editForm");
+  var closeButton = document.getElementsByClassName("closeEdit")[0];
+
+  // Set the form action URL with the post ID
+  form.action = "/posts/edit/" + postId + "/";
+
+  // Populate the form fields with the title and content values
+  form.elements["title"].value = title;
+  form.elements["content"].value = content;
+
+  // Display the edit modal
+  modal.style.display = "block";
+
+  // When the user clicks on the close button, close the modal
+  closeButton.onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // When the user clicks outside the modal, close it
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
-  }
-  
-    // To open and close the friends list
-    const friendListToggle = document.getElementById('friendListToggle');
-    const friendList = document.getElementById('friendList');
+  };
+}
 
-    friendListToggle.addEventListener('click', function () {
-    friendList.classList.toggle('is-hidden');
-    });
+// When the user clicks on the update button, submit the form
+document.getElementById("updateButton").addEventListener("click", function () {
+  document.getElementById("editForm").submit();
+});
+
+// Function to delete a post and reload the page
+function deletePost(postId) {
+  if (confirm("Are you sure you want to delete this post?")) {
+    fetch(`/posts/delete/${postId}/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": "{{ csrf_token }}"
+      }
+    })
+      .then(response => {
+        if (response.status === 200) {
+          location.reload(); // Reload the page after the post is deleted
+        } else {
+          // Handle errors if needed
+        }
+      })
+      .catch(error => {
+        // Handle errors if needed
+      });
+  }
+}
 </script>
 {% endblock %}

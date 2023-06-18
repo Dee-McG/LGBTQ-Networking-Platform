@@ -16,6 +16,11 @@ class Profile(models.Model):
         related_name="profile",
         on_delete=models.CASCADE
         )
+    pronouns = models.CharField(
+        max_length=100,
+        null=True,
+        default='Unspecified'
+        )
     job_title = models.CharField(
         max_length=100,
         null=True,
@@ -73,6 +78,10 @@ class Profile(models.Model):
                 )
 
 
+    def skills_as_list(self):
+        return self.skills.split(',')        
+
+
 class FriendRequest(models.Model):
     """Friend Request Model"""
     from_user = models.ForeignKey(
@@ -97,3 +106,5 @@ def create_user_profile(instance, created, **kwargs):
         Profile.objects.create(
             user=instance
             )
+
+
