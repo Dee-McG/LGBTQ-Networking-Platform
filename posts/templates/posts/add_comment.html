@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="container imagebg">
+        <div class="post-container">
+            <div class="title-heading">
+                <p>{{ post.title }}</p>
+            </div>
+            <div class="content-container">
+                <p>{{ post.content }}</p>
+            </div>
+            <div class="post-date">
+                <p>
+                    {{ post.date_added }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="add-comment-container">
+        <p>Let others know your opinion</p>
+        <form method="POST" action="{% url 'add_comment' %}" class="form mb-2" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <div>
+             <button type='button'><a href="{% url 'all_comments' %}">Cancel</a></button>   
+                <button type="submit">Add Comment</button>
+            </div>
+        </form>
+    </div>
+ {% endblock %}

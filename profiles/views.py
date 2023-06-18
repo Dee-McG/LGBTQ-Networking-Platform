@@ -79,20 +79,30 @@ def remove_friend(request, friend_id):
     return redirect('profile', pk=user_profile.pk)
 
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
     """User Profile View"""
     template_name = "profile.html"
 
     def get_context_data(self, **kwargs):
         profile = Profile.objects.get(user=self.kwargs["pk"])
-        friend_request_received = profile.received_friend_requests.all()
-        friend_request_sent = (
-            profile in self.request.user.profile.sent_friend_requests.all()
-            )
+        friend_request_received = None
+        friends = None
+        if self.request.user.is_authenticated:
+            friend_request_received = profile.received_friend_requests.all()
+            if self.request.user == profile.user:
+                # If the logged-in user is viewing their own profile,
+                # retrieve all friends
+                friends = profile.friends.all()
+            else:
+                # If the logged-in user is viewing another profile,
+                # check if they are friends with the profile owner
+                logged_in_user_profile = Profile.objects.get(user=self.request.user)
+                if logged_in_user_profile.friends.filter(user=profile.user).exists():
+                    friends = profile.friends.all()
         context = {
             'profile': profile,
             'friend_request_received': friend_request_received,
-            'friend_request_sent': friend_request_sent,
+            'friends': friends,
             'form': ProfileForm(instance=profile)
         }
         return context
@@ -101,10 +111,8 @@ class ProfileView(TemplateView):
         profile = Profile.objects.get(user=self.request.user)
         friend_username = request.POST.get('friend_username')
         friend_profile = Profile.objects.get(user__username=friend_username)
-
         # send request
         profile.send_friend_request(friend_profile.user)
-
         return redirect('profile', pk=profile.pk)
 
 

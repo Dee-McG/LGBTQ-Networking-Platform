@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="all-post-container">
+    <h2>Comments</h2>
+    </p>
+</div>
+
+        <p>Let others know your opinion</p>
+
+</div>
+{% if not post.comments.all %}
+    No comment Yet......<a href="{% url 'add_comment' %}">Add Comment</a>
+{% else %}
+{% for comment in post.comments.all %}
+    {{ comment.name }}
+    {{ comment.date_added }}
+    <br>
+    {{ comment.content }}
+{% endfor %}
+{% endif %}    
+</div>
+
+{% endblock %}

@@ -16,6 +16,9 @@
                 {{ post.date_added }}
             </p>
         </div>
+        <button type="button"><a href="{% url 'add_comment'%} "
+        >Comment</a></button>
+        <button type="button"><a href="{% url 'all_comments' %}">Add Comment</a></button>
     </div>
 </div>
 {% endblock %}

@@ -4,8 +4,8 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment
+from .forms import PostForm, CommentForm
 
 
 def all_post(request):
@@ -15,6 +15,7 @@ def all_post(request):
     }
 
     return render(request, 'posts/all_post.html', context)
+
 
 def post_detail(request, post_id):
     """ A view to show individual post details """
@@ -75,7 +76,6 @@ def edit_post(request, post_id):
         'form': form,
         'post': post,
     }
-
     return render(request, template, context)
 
 
@@ -85,4 +85,81 @@ def delete_post(request, post_id):
     post.delete()
     messages.success(request, 'Post deleted!')
     return redirect(reverse('posts'))
+
+""" View functions for Commenting """
+
+
+def all_comments(request):
+    comments = Comment.objects.all()
+    context = {
+        comments: comments,
+    }
+    return render(request, 'posts/all_comments.html', context)
+
+
+def comment_detail(request, comment_id):
+    """ A view to show individual comment details """
+    comment = get_object_or_404(Comments, pk=comment_id)
+
+    context = {
+        comment: comment,
+    }
+    if request.method == 'POST' and request.user.is_authenticated:
+        content = request.POST.get('content', '')
+        return redirect('comment_detail', comment_id=comment_id)
+    return render(request, 'posts/comment_detail.html', context)
+
+
+@login_required
+def add_comment(request):
+    """ Add  comment"""
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.author = request.user
+            comment = form.save()
+            messages.success(request, 'Successfully added comment!')
+            return redirect(reverse('comment_detail', args=[form.pk]))
+        else:
+            messages.error(request, 'Failed to add comment. Please ensure the form is valid.')
+    else:
+        form = CommentForm()
+
+    template = 'posts/add_comment.html'
+    context = {
+        'form': form,
+    }
+    return render(request, template, context)
+
+
+def edit_comment(request, comment_id):
+    """ Edit  comment"""
+    comment = get_object_or_404(Post, pk=comment_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated your comment!')
+            return redirect(reverse('comment_detail', args=[comment.id]))
+        else:
+            messages.error(request, 'Failed to update comment. Please ensure the form is valid.')
+    else:
+        form = CommentForm(instance=post)
+        messages.info(request, f'You are editing {comment.name}')
+    template = 'posts/edit_post.html'
+    context = {
+        'form': form,
+        comment: comment,
+    }
+    return render(request, template, context)
+
+
+def delete_comment(request, comment_id):
+    """ Delete comment """
+    comment = get_object_or_404(Post, pk=comment_id)
+    comment.delete()
+    messages.success(request, 'Comment deleted!')
+    return redirect(reverse(comment))
+
 

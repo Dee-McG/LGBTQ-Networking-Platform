@@ -4,12 +4,12 @@
 {% block content %}
 
 <div class="edit-post-container">
-    <form method="POST" action="{% url 'edit_post' post.id %}" class="form mb-2" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'edit_comment' comment.id %}" class="form mb-2" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <div >
-            <a href="{% url 'post' %}">Cancel</a>
-            <button  type="submit">Update Post</button>
+            <a href="{% url 'comment_detail' %}">Cancel</a>
+            <button  type="submit">Update Comment</button>
         </div>
     </form>
 </div>   

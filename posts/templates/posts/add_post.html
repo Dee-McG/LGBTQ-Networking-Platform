@@ -8,7 +8,7 @@
         <p>Share your thoughs with others</p>
         <form method="POST" action="{% url 'add_post' %}" class="form mb-2" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form }}
+            {{ form.as_p }}
             <div>
              <button type='button'><a href="{% url 'all_post' %}">Cancel</a></button>   
                 <button type="submit">Add post</button>

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container imagebg">
+    <div class="comment-container">
+        <div class="content-container">
+            <p>{{ post.comments.content }}</p>
+        </div>
+        <div class="post-date">
+            <p>
+                {{ post.comments.date_added }}
+            </p>
+        </div>
+        <button type="button"><a href="{% url 'edit_comment'%} "
+        >Edit Comment</a></button>
+    </div>
+</div>
+{% endblock %}
