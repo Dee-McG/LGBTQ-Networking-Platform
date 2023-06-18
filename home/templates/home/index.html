@@ -2,40 +2,101 @@
 {% load static %}
 
 {% block extra_title %}Home{% endblock %}
- 
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
-    <div class="home-pro">
+  <div class="home-pro">
     <div class="card">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-left">
-              <figure class="image is-48x48">
-                {% if profile.image %}
-                <img src="{{profile.image.url}}" alt="{{request.user.username}}'s profile image">
-                {% else %}
-                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                {% endif %}
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              {% if profile.image %}
+              <img src="{{profile.image.url}}" alt="{{request.user.username}}'s profile image">
+              {% else %}
+              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+              {% endif %}
             </figure>
-            </div>
-            <div class="media-content">
-              <p class="title is-4">TBC</p>
-              <p class="subtitle is-6">@{{profile.user.username}}</p>
-            </div>
           </div>
-      
-          <div class="content">
-            {% if profile.job_title %}
-            {{profile.job_title}}
-            {% endif %}
+          <div class="media-content">
+            <p class="title is-4">TBC</p>
+            <p class="subtitle is-6">@{{profile.user.username}}</p>
           </div>
+        </div>
+
+        <div class="content">
+          {% if profile.job_title %}
+          {{profile.job_title}}
+          {% endif %}
         </div>
       </div>
     </div>
-    <div class="home-posts">
+  </div>
+  <div class="home-posts">
+    <button class="button is-primary" id="myBtn">
+      <strong>Create Post</strong>
+    </button>
+  </div>
 
-    </div>
+    <!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <form method="POST" action="{% url 'profile_edit' request.user.id %}" class="form"
+          enctype="multipart/form-data">
+          <h1 class="title text-center fs-4">Create Post</h1>
+          {% csrf_token %}
+          {{ form|crispy }}
+          {{ form.media }}
+          <div class="d-flex justify-content-center">
+              <button type="submit" class="button primary">Post</button>
+          </div>
+      </form>
+  </div>
 </div>
 
+{% endblock %}
+
+{% block extra_js %} 
+<script>
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+  
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  
+    // To open and close the friends list
+    const friendListToggle = document.getElementById('friendListToggle');
+    const friendList = document.getElementById('friendList');
+
+    friendListToggle.addEventListener('click', function () {
+    friendList.classList.toggle('is-hidden');
+    });
+</script>
 {% endblock %}

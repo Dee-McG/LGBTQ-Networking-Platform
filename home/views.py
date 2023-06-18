@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from profiles.models import Profile
+from posts.forms import PostForm
 
 class IndexView(LoginRequiredMixin, TemplateView):
     """Home Page View"""
@@ -9,7 +10,8 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = {
-            "profile": Profile.objects.get(user=self.request.user)
+            "profile": Profile.objects.get(user=self.request.user),
+            "form": PostForm(),
         }
         return context
     

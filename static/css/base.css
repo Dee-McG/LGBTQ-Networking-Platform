@@ -38,7 +38,6 @@ body {
 
 #myBtn {
     display: flex;
-    width: 31px;
 }
 
 /* Profiles */
@@ -148,11 +147,5 @@ body {
 }
 
 @media screen and (min-width: 800px) {
-    .home-pro {
-        width: 30%;
-    }
 
-    .home-posts {
-        width: 70%;
-    }
 }
