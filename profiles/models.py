@@ -78,6 +78,10 @@ class Profile(models.Model):
                 )
 
 
+    def skills_as_list(self):
+        return self.skills.split(',')        
+
+
 class FriendRequest(models.Model):
     """Friend Request Model"""
     from_user = models.ForeignKey(
@@ -102,3 +106,5 @@ def create_user_profile(instance, created, **kwargs):
         Profile.objects.create(
             user=instance
             )
+
+
