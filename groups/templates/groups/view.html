@@ -64,7 +64,7 @@
     {% for post in posts %} 
     <div class="card mt-3 p-3">
         <div class="post">
-            <div><strong>{{post.user}}</strong> - {{post.posted_date}}</div>
+            <div><strong><a href="{% url 'profile' post.user.id %}">{{post.user}}</a></strong> - {{post.posted_date}}</div>
             {{post.post|safe}}
             <figure class="image max-img-size">
                 {% if post.image %}
@@ -78,7 +78,7 @@
         <div class="comment-info-{{post.id}} hidden">
             {% for comment in post.post_comment.all %}
             <div class="comment">
-                <div><strong>{{comment.user}}</strong></div>
+                <div><strong><a href="{% url 'profile' comment.user.id %}">{{comment.user}}</a></strong></div>
                 {{comment.comment|safe}}
             </div>
             {% endfor %}
