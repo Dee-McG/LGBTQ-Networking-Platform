@@ -55,6 +55,7 @@
         </div>
     </div>
 
+    {% if request.user in group.members.all %}
     <!-- Group Posts -->
     <button class="button is-primary mt-4" id="myBtn">
         <strong>Create Post</strong>
@@ -91,6 +92,7 @@
         </div>
     </div>
     {% endfor %}
+    {% endif %}
 
 
 <!-- The Modal -->
