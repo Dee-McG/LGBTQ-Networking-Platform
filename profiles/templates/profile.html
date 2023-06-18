@@ -63,9 +63,9 @@
                 <p class="title is-4">
                     {{ profile.user.first_name }} {{ profile.user.last_name }}
                     <!-- Trigger/Open The Modal -->
-                    <button id="myBtn" class="no-style" aria-label="Edit Profile Page">
+                    <a href="{% url 'profile_edit' request.user.id %}" class="no-style" aria-label="Edit Profile Page">
                         <img src="{% static '/icons/edit.svg' %}" alt="Edit image picture" class="nav-pic">
-                    </button>
+                    </a>
                 </p>
                 <p class="subtitle is-6">@{{profile.user.username}}</p>
                 <p class="subtitle is-6">{{profile.pronouns}}</p>
@@ -132,62 +132,16 @@
             <li style="list-style-type: none;">No friends found.</li>
         {% endif %}
 
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <form method="POST" action="{% url 'profile_edit' request.user.id %}" class="form"
-                    enctype="multipart/form-data">
-                    <h1 class="title text-center fs-4">Edit Profile</h1>
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    {{ form.media }}
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="button primary">Edit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+    {% endblock %}
 
+    {% block extra_js %}
+    <script>
+        // To open and close the friends list
+        const friendListToggle = document.getElementById('friendListToggle');
+        const friendList = document.getElementById('friendList');
 
-
-        {% endblock %}
-
-        {% block extra_js %}
-        <script>
-            // Get the modal
-            var modal = document.getElementById("myModal");
-
-            // Get the button that opens the modal
-            var btn = document.getElementById("myBtn");
-
-            // Get the <span> element that closes the modal
-            var span = document.getElementsByClassName("close")[0];
-
-            // When the user clicks on the button, open the modal
-            btn.onclick = function () {
-                modal.style.display = "block";
-            }
-
-            // When the user clicks on <span> (x), close the modal
-            span.onclick = function () {
-                modal.style.display = "none";
-            }
-
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-
-            // To open and close the friends list
-            const friendListToggle = document.getElementById('friendListToggle');
-            const friendList = document.getElementById('friendList');
-
-            friendListToggle.addEventListener('click', function () {
-                friendList.classList.toggle('is-hidden');
-            });
-        </script>
-        {% endblock %}
+        friendListToggle.addEventListener('click', function() {
+            friendList.classList.toggle('is-hidden');
+        });
+    </script>
+    {% endblock %}
