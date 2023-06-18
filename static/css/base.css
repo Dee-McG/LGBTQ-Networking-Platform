@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Lexend:wght@200;300;400;500&display=swap');
 
 body {
-    background: url(../../home/images/background-image.jpg);
+    background: url(../images/background-image.jpg);
 }
 
 .home-pro {
@@ -76,7 +76,7 @@ body {
     font-weight: 300;
     color: #000;
     text-transform: uppercase;
-    background: url(../../home/images/Rectangle.png) center;
+    background: url(../images/white-noise.png) center;
     padding: 8px 12px;
     border: 2px solid #000;
     border-radius: 20px;
@@ -101,7 +101,7 @@ body {
 .who-box {
     max-width: 700px;
     margin: 40px auto 0;
-    background: url(../../home/images/Rectangle.png) center;
+    background: url(../images/white-noise.png) center;
     border-radius: 30px;
     padding: 15px;
     margin-bottom: 20px;
@@ -123,7 +123,7 @@ body {
 
 .box-row {
     max-width: 400px;
-    background: url(../../home/images/Rectangle.png) center;
+    background: url(../images/white-noise.png) center;
     border-radius: 30px;
     padding: 15px;
     margin: 0 10px 30px;
