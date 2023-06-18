@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-pro {
+    width: 90%;
+    margin: 2rem;
+}
+
+.home-posts {
+    width: 90%;
+    margin: 2rem;
+}
+
+@media screen and (min-width: 800px) {
+    .container {
+        flex-direction: row;
+    }
+    .home-pro {
+        width: 30%;
+    }
+    .home-posts {
+        width: 70%;
+    }
+}
