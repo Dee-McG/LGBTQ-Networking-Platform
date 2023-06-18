@@ -13,6 +13,14 @@
     margin: 2rem;
 }
 
+.post-white {
+    background-color: #ffffff;
+}
+  
+.post-gray {
+    background-color: #f2f2f2;
+}
+
 @media screen and (min-width: 800px) {
     .container {
         flex-direction: row;

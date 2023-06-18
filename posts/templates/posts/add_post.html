@@ -6,7 +6,7 @@
 <div class="container">
     <div class="add-post-container">
         <p>Share your thoughs with others</p>
-    <form method="POST" action="{% url 'add_post' %}" class="form mb-2" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'posts:add_post' %}" class="form mb-2" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <div>

@@ -84,14 +84,15 @@
                 </div>
             </div>
         </div>
-
-        <div class="content">
-            <p>Friends:
-                <button class="button is-text is-small" id="friendListToggle">Show/Hide</button>
-            </p>
-            <ul id="friendList" class="is-hidden">
-                {% if friends %}
-                {% for friend in friends %}
+      </div>
+  
+      <div class="content">
+        <p>Friends:
+          <button class="button is-text is-small" id="friendListToggle">Show/Hide</button>
+        </p>
+        <ul id="friendList" class="is-hidden list-unstyled">
+          {% if friends %}
+            {% for friend in friends %}
                 <li class="is-flex is-align-items-center is-justify-content-space-between">
                     <div class="is-flex is-align-items-center">
                         <figure class="image is-32x32">
@@ -114,39 +115,18 @@
                         </div>
                     </div>
                     {% if request.user == profile.user %}
-                    <form method="POST" action="{% url 'remove_friend' profile.user.profile.pk %}">
-                        {% csrf_token %}
-                        <button class="button is-danger is-small" type="submit">Remove Friend</button>
-                    </form>
+                        <form method="POST" action="{% url 'remove_friend' friend.user.profile.pk %}">
+
+                            {% csrf_token %}
+                            <button class="button is-danger is-small" type="submit">Remove Friend</button>
+                        </form>
                     {% endif %}
                 </li>
-                {% empty %}
-                <li>No friends found.</li>
-                {% endfor %}
-                {% else %}
-                <li>No friends found.</li>
-                {% endif %}
-            </ul>
-        </div>
-        {% if user == profile.user %}
-        <div class="section">
-            <h2 class="subtitle">Friend Request Received</h2>
-            {% if friend_request_received %}
-            <ul class="notification">
-                {% for friend_request in friend_request_received %}
-                <li>{{ friend_request.from_user.user.username }} sent you a friend request</li>
-                <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
-                    {% csrf_token %}
-                    <button class="button is-success is-small" type="submit">Accept</button>
-                </form>
-                <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
-                    {% csrf_token %}
-                    <button class="button is-danger is-small" type="submit">Deny</button>
-                </form>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </div>
+            {% empty %}
+                <li class="has-text-grey-light" style="list-style-type: none;">No friends found.</li>
+            {% endfor %}
+        {% else %}
+            <li class="has-text-grey-light" style="list-style-type: none;">No friends found.</li>
         {% endif %}
 
         <!-- The Modal -->
