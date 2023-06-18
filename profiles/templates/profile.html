@@ -81,7 +81,7 @@
         <p>Friends:
           <button class="button is-text is-small" id="friendListToggle">Show/Hide</button>
         </p>
-        <ul id="friendList" class="is-hidden">
+        <ul id="friendList" class="is-hidden list-unstyled">
           {% if friends %}
             {% for friend in friends %}
                 <li class="is-flex is-align-items-center is-justify-content-space-between">
@@ -113,10 +113,10 @@
                     {% endif %}
                 </li>
             {% empty %}
-                <li>No friends found.</li>
+                <li class="has-text-grey-light" style="list-style-type: none;">No friends found.</li>
             {% endfor %}
         {% else %}
-            <li>No friends found.</li>
+            <li class="has-text-grey-light" style="list-style-type: none;">No friends found.</li>
         {% endif %}
         </ul>        
       </div>      
