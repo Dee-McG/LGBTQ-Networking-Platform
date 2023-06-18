@@ -10,9 +10,9 @@
             {% csrf_token %}
             {{ form }}
             <div>
-                <a href="{% url 'all_post' %}">Cancel</a>
+             <button type='button'><a href="{% url 'all_post' %}">Cancel</a></button>   
                 <button type="submit">Add post</button>
             </div>
         </form>
     </div>
-    {% endblock %}
+ {% endblock %}
