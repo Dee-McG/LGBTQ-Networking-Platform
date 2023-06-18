@@ -117,7 +117,7 @@ def add_comment(request):
         form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
             form = form.save(commit=False)
-            form.post = request.user
+            form.author = request.user
             comment = form.save()
             messages.success(request, 'Successfully added comment!')
             return redirect(reverse('comment_detail', args=[form.pk]))
@@ -147,7 +147,7 @@ def edit_comment(request, comment_id):
     else:
         form = CommentForm(instance=post)
         messages.info(request, f'You are editing {comment.name}')
-    template = 'posts/edit_post.html'
+    template = 'posts/edit_comment.html'
     context = {
         'form': form,
         comment: comment,
