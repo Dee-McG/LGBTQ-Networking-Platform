@@ -13,7 +13,7 @@
         {{ form|crispy }}
         <div class="buttons text-center">
             <button type="submit" class="button is-primary mr-2">Edit</button>
-            <a href="/profile/user/{{request.user.id}}/" class="button is-primary mr-2">Cancel</a>
+            <a href="{% url 'profile' request.user.id %}" class="button is-primary mr-2">Cancel</a>
         </div>
     </form>
 </div>
