@@ -1,49 +1,51 @@
-## Quick start
+# Inclusinet
 
-### Local IDE Users
-Clone the repo:
-```
-git clone https://github.com/Daisy-McG/LGBTQ-Networking-Platform.git
-```
+## Introduction
+Inclusinet is an innovative digital platform that serves as a professional network specifically designed for the LGBTQ+ community. Born out of the need for a dedicated space that encourages inclusivity and diversity, Inclusinet aims to foster professional growth, networking, and camaraderie among LGBTQ+ professionals and allies across the globe.
 
-Create virtual environment and activate
-```
-python -m venv .venv
-.venv/Scripts/activate (windows)
-source .venv/bin/activate (mac)
-```
+Our platform, developed using the robust Django framework, offers a safe and welcoming environment where users can connect, exchange ideas, seek advice, and explore opportunities, all the while knowing that they are within a community that respects, supports, and celebrates their identities.
 
-### Cloud IDE (Gitpod)
+Whether you're seeking to grow your career, find new business opportunities, or simply connect with like-minded individuals who share your experiences, Inclusinet is your go-to destination. Here, we honor every individual’s unique journey and professional ambitions, empowering you to unlock your full potential in an affirming and vibrant network.
 
-Create a new workspace from the main [repo](https://github.com/Daisy-McG/LGBTQ-Networking-Platform)
+Beyond connections, Inclusinet is also a resource hub, providing access to job listings, educational materials, and professional development events that are all LGBTQ+ friendly.
 
-### Setup (All users)
+Inclusinet is more than just an app, it's a movement, designed to create a world where everyone, regardless of their gender identity or sexual orientation, has equal access to professional opportunities. Join us in pioneering a new era of networking, one where inclusivity is not an afterthought, but the very foundation.
 
-Create an env.py file at the root directory and add the following
+## User Stories
+- Create an account: As a new user, I want to be able to create an account so that I can join the Inclusinet community and start networking with other LGBTQ+ professionals.
+- Edit Profile: As a user, I want to be able to edit my profile so that I can update my personal and professional information, keeping it current and relevant for other community members.
+- Create Posts: As a user, I want to be able to create posts so that I can share my thoughts, experiences, professional achievements, and opportunities with others in the community.
+- Search: As a user, I want to be able to search for specific users, posts, or topics so that I can find relevant content or connections more easily within the community.
+- Groups: As a user, I can create group or join created groups
+- Add friends: As a user, I want to be a able to send requests to other users 
 
-```
-import os
 
-os.environ["SECRET_KEY"] = "jr43jk5k3j54345m,madsad"
-os.environ["DEVELOPMENT"] = "jr43jk5k3j54345m,madsad"
-os.environ["HOST"] = "8000-daisymcg-lgbtqnetworkin-urc3apbybij.ws-eu99.gitpod.io" <--- Replace this with gitpod url - not needed for vscode ect.
-os.environ["FULLHOST"] = "https://8000-daisymcg-lgbtqnetworkin-urc3apbybij.ws-eu99.gitpod.io" <--- Replace this with gitpod url - not needed for vscode ect.
-```
+## Features
+### Home Page
 
-Install requirements
+### Login Page
 
-```
-pip install -r requirements.txt
-```
+### Sign up Page
 
-Run Migrations
+### Edit profile page
 
-```
-python manage.py migrate
-```
+### Groups page
 
-Start the App
+### Mentor page
 
-```
-python manage.py runserver
-```
+
+## Technologies
+### Languages Used
+- HTML
+- CSS
+- JavaScript
+- Python
+- Django
+
+
+## Contributors
+- [Christian](https://github.com/CBergane)
+- [Daisy](https://github.com/Daisy-McG)
+- [Mohamed](https://github.com/moabdelbasset)
+- [Tina](https://github.com/chasakara)
+- [Valentino](https://github.com/tinobragaa)
