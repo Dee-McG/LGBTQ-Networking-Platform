@@ -25,7 +25,9 @@ Inclusinet is more than just an app, it's a movement, designed to create a world
 
 ## Features
 ### Home Page
-![Homepage](docs/readme_imgaes/homepage.png)
+
+![Homepage](docs/readme_images/homepage.png)
+
 
 In the home page the user can view his posts and friend's post and the number of friends connection and the group name participation
 
