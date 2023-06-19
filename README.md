@@ -1,4 +1,6 @@
 # Inclusinet
+![Mockup](docs/readme_imges/mockup.png)
+
 
 ## Introduction
 Inclusinet is an innovative digital platform that serves as a professional network specifically designed for the LGBTQ+ community. Born out of the need for a dedicated space that encourages inclusivity and diversity, Inclusinet aims to foster professional growth, networking, and camaraderie among LGBTQ+ professionals and allies across the globe.
@@ -22,17 +24,34 @@ Inclusinet is more than just an app, it's a movement, designed to create a world
 
 ## Features
 ### Home Page
+![Homepage](docs/readme_imges/homepage.png)
+
+In the home page the user can view his posts and friend's post and the number of friends connection and the group name participation
 
 ### Login Page
+![Homepage](docs/readme_imges/login.png)
+
+In the login page the user needs to submit the username and password and can choose the remember me option
 
 ### Sign up Page
+![Signup](docs/readme_imges/signup.png)
+
+In the sign up page the user can register to our website by specifing username, mail and password. The login verification will be sent over the mail to verify the user access
 
 ### Edit profile page
+![Edit](docs/readme_imges/editprofile.png)
+
+Users can edit their profiles. They can specify their skills, Job title, Location and if they have a mentor or not. Also they can upload a profile picture 
 
 ### Groups page
+![groups](docs/readme_imges/groups.png)
 
-### Mentor page
+Users can subscribe to the groups or create new groups
 
+### Search page
+![search](docs/readme_imges/search.png)
+
+Users can search for other friends to connect
 
 ## Technologies
 ### Languages Used
@@ -42,6 +61,8 @@ Inclusinet is more than just an app, it's a movement, designed to create a world
 - Python
 - Django
 
+### Frameworks
+- Bulma
 
 ## Contributors
 - [Christian](https://github.com/CBergane)
