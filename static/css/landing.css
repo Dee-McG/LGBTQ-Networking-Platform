@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Lexend:wght@200;300;400;500&display=swap');
 
 main {
-    background: url(../images/background-image.jpg);
+    background: url(../images/background-image.webp);
     background-size: cover;
 }
 
@@ -58,7 +58,7 @@ main {
     font-weight: 500;
     color: #000;
     text-transform: uppercase;
-    background: url(../images/white-noise.png) center;
+    background: url(../images/white-noise.webp) center;
     padding: 8px 12px;
     border: 2px solid #000;
     border-radius: 20px;
@@ -77,7 +77,7 @@ main {
 .who-box {
     max-width: 700px;
     margin: 9.5% auto 20px;
-    background: url(../images/white-noise.png) center;
+    background: url(../images/white-noise.webp) center;
     border-radius: 30px;
     padding: 15px;
     border: 2px solid #000;
@@ -100,7 +100,7 @@ main {
 
 .box-row {
     max-width: 400px;
-    background: url(../images/white-noise.png) center;
+    background: url(../images/white-noise.webp) center;
     border-radius: 30px;
     padding: 15px;
     margin: 0 10px 30px;
