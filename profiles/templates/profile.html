@@ -108,8 +108,8 @@
                 <li class="is-flex is-align-items-center is-justify-content-space-between">
                     <div class="is-flex is-align-items-center">
                         <figure class="image is-32x32">
-                            {% if friend.profile.image %}
-                            <img src="{{ friend.profile.image.url }}" alt="{{ friend.user.username }}'s profile picture" class="is-rounded">
+                            {% if friend.user.profile.image %}
+                            <img src="{{ friend.user.profile.image.url }}" alt="{{ friend.user.username }}'s profile picture" class="is-rounded">
                             {% else %}
                             <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image" class="is-rounded">
                             {% endif %}
