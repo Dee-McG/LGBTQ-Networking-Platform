@@ -31,15 +31,18 @@
             {% else %}
                 {% for friend_request in friend_request_received %}
                     {% if profile.user == profile.user %}
-                    <p>You have received a friend request from this user:</p>
-                    <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
-                        {% csrf_token %}
-                        <button class="button is-success is-small" type="submit">Accept</button>
-                    </form>
-                    <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
-                        {% csrf_token %}
-                        <button class="button is-danger is-small" type="submit">Deny</button>
-                    </form>
+                    <p>You have received a friend request from this user: <a class="has-text-decoration-none has-text-black" href="{% url 'profile' pk=friend_request.from_user.user.pk %}">
+                        <strong>{{ friend_request.from_user.user.username }}</strong></a></p>
+                    <div class="is-flex is-align-items-center">
+                        <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
+                            {% csrf_token %}
+                            <button class="button is-success is-small mr-2" type="submit">Accept</button>
+                        </form>
+                        <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="button is-danger is-small" type="submit">Deny</button>
+                        </form>
+                    </div>
                     {% endif %}
                 {% endfor %}
           
@@ -95,6 +98,9 @@
       <div class="content p-4">
         <p>Friends:
           <button class="button is-text is-small" id="friendListToggle">Show/Hide</button>
+            {% if friends %}
+                <span class="tag is-primary is-rounded">{{ friends.count }}</span>
+            {% endif %}
         </p>
         <ul id="friendList" class="is-hidden list-unstyled">
           {% if friends %}
@@ -133,7 +139,9 @@
         {% else %}
             <li style="list-style-type: none;">No friends found.</li>
         {% endif %}
-
+        </ul>
+      </div>
+</div>
     {% endblock %}
 
     {% block extra_js %}
