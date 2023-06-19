@@ -1,5 +1,5 @@
 # Inclusinet
-![Mockup](docs/readme_imges/mockup.png)
+![Mockup](docs/readme_images/mockup.png)
 
 
 ## Introduction
@@ -19,12 +19,15 @@ Inclusinet is more than just an app, it's a movement, designed to create a world
 - Create Posts: As a user, I want to be able to create posts so that I can share my thoughts, experiences, professional achievements, and opportunities with others in the community.
 - Search: As a user, I want to be able to search for specific users, posts, or topics so that I can find relevant content or connections more easily within the community.
 - Groups: As a user, I can create group or join created groups
-- Add friends: As a user, I want to be a able to send requests to other users 
+- Add friends: As a user, I want to be a able to send requests to other users
+- Users can book a session via email with a Mentor by searching the experience that the mentor has.
 
 
 ## Features
 ### Home Page
+
 ![Homepage](docs/readme_images/homepage.png)
+
 
 In the home page the user can view his posts and friend's post and the number of friends connection and the group name participation
 
@@ -52,6 +55,11 @@ Users can subscribe to the groups or create new groups
 ![search](docs/readme_images/search.png)
 
 Users can search for other friends to connect
+
+### Mentor page
+![mentors](docs/readme_images/mentor.png)
+
+Users can search for a mentors skillset and send a request via email
 
 ## Technologies
 ### Languages Used
