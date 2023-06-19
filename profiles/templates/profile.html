@@ -29,9 +29,9 @@
                     {% endif %}
                 {% endif %}
             {% else %}
-            {% with friend_request=friend_request_received|first %}
-                {% if friend_request and friend_request.from_user == profile.user %}
-                    <p>You have received a friend request from this user.</p>
+                {% for friend_request in friend_request_received %}
+                    {% if profile.user == profile.user %}
+                    <p>You have received a friend request from this user:</p>
                     <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
                         {% csrf_token %}
                         <button class="button is-success is-small" type="submit">Accept</button>
@@ -41,7 +41,8 @@
                         <button class="button is-danger is-small" type="submit">Deny</button>
                     </form>
                     {% endif %}
-                {% endwith %}
+                {% endfor %}
+          
                 {% if not remove_friend_clicked %}
                     <p>You are viewing your own profile.</p>
                 {% endif %}
