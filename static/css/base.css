@@ -109,6 +109,10 @@ span.logo-title:hover {
     border: none;
 }
 
+[class^="comment-text"]:hover {
+    cursor: pointer;
+}
+
 /* Profiles */
 
 .title.is-4 {
