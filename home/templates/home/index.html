@@ -38,24 +38,26 @@
     </div>
   </div>
   <div class="home-posts">
-    <button class="button is-primary" id="myBtn">
+    <button class="button is-primary" id="myBtn" style="margin: 0 auto;">
       <strong>Create Post</strong>
     </button>
     <!-- Post List -->
-    <div class="post-list p-4">
+    <div class="post-list mt-4">
       {% for post in posts %}
-      <div class="post {% cycle 'post-white' 'post-gray' %} p-2">
+      <div class="post card {% cycle 'post-white' 'post-gray' %} p-2">
         <div class="post-header">
-          <div class="post-author">
-            <img class="post-author-image" src="{% if post.author.profile.image %}{{ post.author.profile.image.url }}{% else %}https://bulma.io/images/placeholders/96x96.png{% endif %}" alt="{{ post.author.username }}'s profile image">
-            <div class="post-author-info">
-              <p class="post-author-name">{{ post.author.get_full_name }}</p>
-              <p class="post-author-username">@{{ post.author.username }}</p>
+          <div class="post-author" style="display: flex; align-items: center;">
+            <img class="image is-48x48" style="border-radius: 50%;"
+            src="{% if post.author.profile.image %}{{ post.author.profile.image.url }}{% else %}https://bulma.io/images/placeholders/96x96.png{% endif %}" 
+            alt="{{ post.author.username }}'s profile image">
+            <div class="post-author-info pl-4">
+              <span class="post-author-name"><strong>{{ post.author.get_full_name }}</strong></span>
+              <span class="post-author-username" style="display:block;"><a href="{% url 'profile' post.author.id %}">@{{ post.author.username }}</a></span>
             </div>
           </div>
           <div class="post-date">{{ post.created_at }}</div>
         </div>
-        <div class="post-content">{{ post.content }}</div>
+        <div class="post-content mt-4 mb-4">{{ post.content }}</div>
 
         {% if post.author == request.user %}
         <div class="post-actions">
