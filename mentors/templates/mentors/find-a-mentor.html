@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_title %}Mentor Search Results{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <form method="get" action="{% url 'mentor_search' %}" class="search">
+        <input type="search" name="q" placeholder="Find Mentors" aria-label="Search" class="form-control">
+        <button type="submit" class="search-icon"><img src="{% static '/icons/search.svg' %}" alt="Search Icon" class="nav-pic"></button>
+    </form>
+
+    <h1 class="mt-4 mb-4">Search results</h1>
+
+    <h2>Mentors</h2>
+    {% for mentor in search_results %}
+        <div class="card p-2 mb-2">
+            <p>
+            {% if mentor.user.first_name and mentor.user.last_name %}
+                {{ mentor.user.first_name }} {{ mentor.user.last_name }} 
+            {% endif %}| <a href="{% url 'profile' user.id %}"><strong>@{{ mentor.user.username }}</strong></a>
+            </p>
+            {% if mentor.job_title %}
+            <p><strong>Job Title:</strong> 
+                <span style="display: block;">{{ mentor.job_title }}</span></p>
+            {% endif %}
+            {% if mentor.mentor_expertise %}
+            <p style="display: block;"><strong>Mentor Expertise:</strong> 
+                <span style="display: block;">{{mentor.mentor_expertise}}</span></p>
+            {% endif %}
+            <form method="POST" action="{% url 'create_email' mentor.user.id %}">
+                {% csrf_token %}
+                <button type="submit" class="button is-primary">Email Mentor</button>
+            </form>
+        </div>
+    {% empty %}
+        <p>No results found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

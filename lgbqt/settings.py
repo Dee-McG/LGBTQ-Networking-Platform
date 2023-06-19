@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'posts',
     'profiles',
     'groups',
-    
+    'mentors',
 ]
 
 SITE_ID = 1
