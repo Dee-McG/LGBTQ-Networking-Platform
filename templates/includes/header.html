@@ -1,11 +1,11 @@
 {% load static %}
 
-<header>
+<header class="border-nav">
   <nav class="navbar" role="navigation" aria-label="main navigation">
     {% with request.resolver_match.url_name as url_name %}
     <div class="navbar-brand logo-title">
       <a class="navbar-item" href="{% url 'home' %}">
-        <span class="logo-title">INCLUSINET</span>
+        <span class="logo-title" id="logo-style">Inclusinet</span>
       </a>
 
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -57,10 +57,10 @@
               <strong>Sign out</strong>
             </a>
             {% else %}
-            <a class="button is-primary" href="/accounts/signup/">
+            <a class="button is-primary" id="style-sign" href="/accounts/signup/">
               <strong>Sign up</strong>
             </a>
-            <a class="button is-light" href="/accounts/login/">
+            <a class="button is-light" id="style-log" href="/accounts/login/">
               Log in
             </a>
             {% endif %}
