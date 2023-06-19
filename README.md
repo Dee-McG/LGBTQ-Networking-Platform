@@ -57,7 +57,7 @@ Users can search for other friends to connect
 ### Mentor page
 ![mentors](docs/readme_images/mentor.png)
 
-Users can search for a mentrs skillset and send a request via email
+Users can search for a mentors skillset and send a request via email
 
 ## Technologies
 ### Languages Used
