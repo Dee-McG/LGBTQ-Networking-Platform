@@ -5,6 +5,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/group.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -44,7 +45,7 @@
     <!-- Post List -->
     <div class="post-list mt-4">
       {% for post in posts %}
-      <div class="post card {% cycle 'post-white' 'post-gray' %} p-2">
+      <div class="post card {% cycle 'post-white' 'post-gray' %} p-2 mt-4">
         <div class="post-header">
           <div class="post-author" style="display: flex; align-items: center;">
             <img class="image is-48x48" style="border-radius: 50%;"
@@ -65,6 +66,24 @@
           <button class="button is-small is-primary" onclick="openEditModal({{ post.id }}, '{{ post.title|escapejs }}', '{{ post.content|escapejs }}')">Edit</button>
         </div>
         {% endif %}
+        <hr>
+        <p class="comment-text-{{post.id}} text-center"><strong>Comments ({{ post.post_reply.count}})</strong></p>
+  
+        <div class="comment-info-{{post.id}} hidden">
+            {% for comment in post.post_reply.all %}
+            <div class="comment">
+                <div><strong><a href="{% url 'profile' comment.user.id %}">{{comment.user}}</a></strong></div>
+                {{comment.comment|safe}}
+            </div>
+            {% endfor %}
+            <div class="reply-box">
+                <form method="POST" action="{% url 'posts:post_comment' post.id %}">
+                    {% csrf_token %}
+                    {{comment_form|crispy}}
+                    <button type="submit" class="button is-primary">Send</button>
+                </form>
+            </div>
+        </div>
       </div>
       {% endfor %}
     </div>
@@ -238,5 +257,19 @@ function deletePost(postId) {
       });
   }
 }
+
+const commentInfo = document.querySelectorAll("[class^='comment-info']");
+    const commentTxt = document.querySelectorAll("[class^='comment-text']");
+
+    for(let i = 0; i < commentTxt.length; i++){
+        commentTxt[i].addEventListener("click", function() {
+            if (commentInfo[i].classList.contains("hidden")) {
+                commentInfo[i].classList.remove("hidden");
+            }
+            else {
+                commentInfo[i].classList.add("hidden");
+            }
+        });
+    }
 </script>
 {% endblock %}

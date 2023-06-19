@@ -4,9 +4,12 @@ from django.db.models import Q
 from django.db.models.functions import Lower
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 
-from .models import Post
-from .forms import PostForm
+from .models import Post, PostComments
+from .forms import PostForm, PostCommentForm
 
 
 def all_post(request):
@@ -94,3 +97,21 @@ def delete_post(request, post_id):
     post.delete()
     messages.success(request, 'Post deleted!')
     return redirect(reverse('home'))
+
+
+class CreateComment(LoginRequiredMixin, CreateView):
+    """ A view to create a comment """
+    form_class = PostCommentForm
+    model = PostComments
+    success_message = 'Successfully created comment'
+
+    def form_valid(self, form):
+        """
+        Return to user home if form is valid
+        """
+        form.instance.user = self.request.user
+        post = Post.objects.get(pk=self.kwargs["post_id"])
+        form.instance.post = post
+        self.success_url = f'/'
+        form.save()
+        return HttpResponseRedirect(self.request.META.get('HTTP_REFERER'))
