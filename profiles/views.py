@@ -125,13 +125,7 @@ class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = ProfileForm
     model = Profile
     success_url = "/"
-
-    def get_object(self, queryset=None):
-        user = User.objects.get(pk=self.kwargs['pk'])
-        # get the existing object or create a new one
-        obj, created = self.model.objects.get_or_create(user=user)
-
-        return obj
+    template_name = "edit_profile.html"
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         self.success_url = f'/profile/user/{self.kwargs["pk"]}/'

@@ -25,3 +25,8 @@ class IndexView(LoginRequiredMixin, TemplateView):
         context["form"] = PostForm()
         context["posts"] = posts
         return context
+
+
+class LandingView(TemplateView):
+    """Landing View"""
+    template_name = 'home/landing.html'

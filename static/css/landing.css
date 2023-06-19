@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Lexend:wght@200;300;400;500&display=swap');
+
 main {
     background: url(../images/background-image.jpg);
     background-size: cover;
@@ -100,4 +102,31 @@ main {
     border: 1px solid #000;
     max-width: 650px;
     margin: 10px auto;
+}
+
+@media screen and (max-width: 800px) {
+    .boxes-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .landing-main-title {
+        font-size: 3.8em;
+        line-height: 75px;
+    }
+
+    .landing-arrow {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .landing-main-title {
+        font-size: 2.5em;
+        line-height: 50px;
+    }
+
+    .landing-main-text {
+        font-size: 1.3em;
+    }
 }
