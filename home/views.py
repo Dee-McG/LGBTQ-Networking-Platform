@@ -5,6 +5,7 @@ from django.db.models import Q
 from profiles.models import Profile
 from posts.forms import PostForm, PostCommentForm
 from posts.models import Post
+from groups.models import Group
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -24,6 +25,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
         context["profile"] = profile
         context["form"] = PostForm()
         context["posts"] = posts
+        context["groups"] = Group.objects.filter(members=self.request.user)
         return context
 
 
