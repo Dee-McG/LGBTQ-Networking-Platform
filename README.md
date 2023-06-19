@@ -1,6 +1,7 @@
 # Inclusinet
 ![Mockup](docs/readme_images/mockup.png)
 
+[Live Website](https://inclusinet-b1c323d1a25d.herokuapp.com/)
 
 ## Introduction
 Inclusinet is an innovative digital platform that serves as a professional network specifically designed for the LGBTQ+ community. Born out of the need for a dedicated space that encourages inclusivity and diversity, Inclusinet aims to foster professional growth, networking, and camaraderie among LGBTQ+ professionals and allies across the globe.
@@ -24,10 +25,14 @@ Inclusinet is more than just an app, it's a movement, designed to create a world
 
 
 ## Features
+
+### Landing Page
+![Landing Page](docs/readme_images/landing-page.jpg)
+
+Front page when the user enters the platform.
+
 ### Home Page
-
 ![Homepage](docs/readme_images/homepage.png)
-
 
 In the home page the user can view his posts and friend's post and the number of friends connection and the group name participation
 
@@ -61,6 +66,37 @@ Users can search for other friends to connect
 
 Users can search for a mentors skillset and send a request via email
 
+## Figma Prototypes
+
+<details>
+<summary>Landing Page</summary>
+<br>
+
+![Landing Page](docs/readme_images/landpage-figma.jpg)
+
+</details>
+<details>
+<summary>Log In Page</summary>
+<br>
+
+![Log In Page](docs/readme_images/login-figma.jpg)
+
+</details>
+<details>
+<summary>Sign Up Page</summary>
+<br>
+
+![Sign Up Page](docs/readme_images/signup-figma.jpg)
+
+</details>
+<details>
+<summary>Typography - Colour Palette</summary>
+<br>
+
+![Typography - Colour Palette](docs/readme_images/settings.jpg)
+
+</details>
+
 ## Technologies
 ### Languages Used
 - HTML
@@ -68,9 +104,9 @@ Users can search for a mentors skillset and send a request via email
 - JavaScript
 - Python
 - Django
-
-### Frameworks
 - Bulma
+- Figma
+- Adobe Photoshop
 
 ## Contributors
 - [Christian](https://github.com/CBergane)
