@@ -7,6 +7,28 @@ main {
 
 /* Landing Page */
 
+/* Nav Bar */
+
+.landing-nav {
+    border-bottom: 5px solid #000;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.landing-nav h2 {
+    font-family: 'Krona One', sans-serif;
+    margin: 20px 0 20px 20px;
+}
+
+.buttons-nav-alignment {
+    margin-right: 15px;
+    font-family: 'Lexend', sans-serif;
+}
+
+/* Main Area */
+
 .font-text {
     font-family: 'Lexend', sans-serif;
     text-align: center;
@@ -16,6 +38,7 @@ main {
     font-weight: 500;
     font-size: 4.8em;
     line-height: 100px;
+    margin-top: 9.5%;
 }
 
 .landing-main-text {
@@ -31,7 +54,8 @@ main {
 }
 
 .btn-join-log {
-    font-weight: 300;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 500;
     color: #000;
     text-transform: uppercase;
     background: url(../images/white-noise.png) center;
@@ -48,21 +72,14 @@ main {
     text-decoration: none;
 }
 
-.landing-arrow {
-    text-align: right;
-    font-size: 4em;
-    color: #000;
-    margin: 0 auto 60px;
-    max-width: 1450px;
-}
+/* Boxes Area */
 
 .who-box {
     max-width: 700px;
-    margin: 40px auto 0;
+    margin: 9.5% auto 20px;
     background: url(../images/white-noise.png) center;
     border-radius: 30px;
     padding: 15px;
-    margin-bottom: 20px;
     border: 2px solid #000;
 }
 
@@ -70,6 +87,8 @@ main {
     margin: 0;
     max-width: 650px;
     line-height: 20px;
+    font-size: 1.1em;
+    font-weight: 500;
 }
 
 .boxes-container {
@@ -90,6 +109,8 @@ main {
 
 .box-row p {
     line-height: 20px;
+    font-size: 1.1em;
+    font-weight: 500;
 }
 
 .line-two {
@@ -104,6 +125,30 @@ main {
     margin: 10px auto;
 }
 
+/* Landing Page Footer */
+
+.footer-title {
+    text-align: center;
+    border-top: 5px solid #000;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.footer-title h2 {
+    margin: 10px 0;
+    font-family: 'Krona One', sans-serif;
+    font-size: 2em;
+}
+
+/* Media Queries */
+
+@media screen and (min-height: 1200px) {
+    .footer-title {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
 @media screen and (max-width: 800px) {
     .boxes-container {
         flex-direction: column;
@@ -115,10 +160,23 @@ main {
         line-height: 75px;
     }
 
-    .landing-arrow {
-        display: none;
+    .font-text {
+        margin: 0 5px;
+    }
+
+    .landing-nav {
+        flex-direction: column;
+    }
+
+    .landing-nav h2 {
+        margin: 20px 0 20px 0px;
+    }
+
+    .buttons-nav-alignment {
+        margin: 0 0 35px;
     }
 }
+
 
 @media screen and (max-width: 450px) {
     .landing-main-title {
