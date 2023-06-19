@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Lexend:wght@200;300;400;500&display=swap');
+
 html,
 body {
     height: 100%;
@@ -11,6 +13,10 @@ main {
 }
 .footer {
     flex-shrink: 0;
+}
+
+.border-nav {
+    border-bottom: 5px solid #000;
 }
 
 .home-pro {
@@ -37,6 +43,36 @@ main {
 .logo-title {
     color: #000;
     font-weight: 700;
+    font-family: 'Krona One', sans-serif;
+}
+
+span.logo-title:hover {
+    text-decoration: none;
+}
+
+#style-sign {
+    background: url(../images/white-noise.webp) center;
+    color: #000;
+    border: 2px solid #000;
+    font-family: 'Lexend', sans-serif;
+}
+
+#style-log {
+    background: url(../images/white-noise.webp) center;
+    color: #000;
+    font-weight: 700;
+    border: 2px solid #000;
+    font-family: 'Lexend', sans-serif;
+}
+
+#style-log:hover, #style-sign:hover {
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+}
+
+.button {
+    border-radius: 30px;
 }
 
 /* Forms */
