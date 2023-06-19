@@ -23,6 +23,9 @@
         <a class="navbar-item" href="{% url 'groups' %}">
           <img src="{% static '/icons/group.svg' %}" alt="Group Icon" class="nav-pic">
         </a>
+        <a class="navbar-item" href="{% url 'mentor_search' %}">
+          <img src="{% static '/icons/mentor.svg' %}" alt="Find a mentor Icon" class="nav-pic">
+        </a>
         <!-- Search form -->
         <div class="navbar-item">
           <form method="get" action="{% url 'search' %}" class="search">

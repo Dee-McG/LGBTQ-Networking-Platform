@@ -135,7 +135,7 @@ class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == self.get_object().user
     
 
-class SearchView(ListView):
+class SearchView(LoginRequiredMixin, ListView):
     """Search for a profile"""
     template_name = 'search_results.html'
     context_object_name = 'search_results'
