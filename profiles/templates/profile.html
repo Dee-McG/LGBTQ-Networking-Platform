@@ -9,44 +9,45 @@
     <div class="card-content">
         <div class="media-content mb-2">
             {% if user != profile.user %}
-            {% if not profile in user.profile.friends.all %}
-            {% if not user.is_superuser %}
+                {% if not profile in user.profile.friends.all %}
+                    {% if not profile in user.profile.sent_requests.all %}
+                        <form method="POST" action="{% url 'send_friend_request' profile.user.username %}">
+                            {% csrf_token %}
+                            <button class="button is-primary is-small" type="submit">Send request</button>
+                        </form>
+                    {% else %}
+                        <p>You already have a pending friend request sent to this user.</p>
+                    {% endif %}
+                {% else %}
+                    {% if user.profile in profile.user.profile.friends.all %}
+                        {% if profile != user.profile %}
+                            <form method="POST" action="{% url 'remove_friend' profile.user.profile.pk %}">
+                                {% csrf_token %}
+                                <button class="button is-danger is-small" type="submit">Remove friend</button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% else %}
             {% with friend_request=friend_request_received|first %}
-            {% if not friend_request or friend_request.from_user != profile.user %}
-            {% if not profile in user.profile.sent_requests.all %}
-            <form method="POST" action="{% url 'send_friend_request' profile.user.username %}">
-                {% csrf_token %}
-                <button class="button is-primary is-small" type="submit">Send request</button>
-            </form>
-            {% else %}
-            <p>You already have a pending friend request sent to this user.</p>
-            {% endif %}
-            {% else %}
-            <p>You have received a friend request from this user.</p>
-            <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
-                {% csrf_token %}
-                <button class="button is-success is-small" type="submit">Accept</button>
-            </form>
-            <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
-                {% csrf_token %}
-                <button class="button is-danger is-small" type="submit">Deny</button>
-            </form>
-            {% endif %}
-            {% endwith %}
-            {% else %}
-            <p>You are a superuser and cannot send friend requests.</p>
-            {% endif %}
-            {% else %}
-            {% if not remove_friend_clicked %}
-            <form method="POST" action="{% url 'remove_friend' profile.user.profile.pk %}">
-                {% csrf_token %}
-                <button class="button is-danger is-small" type="submit">Remove friend</button>
-            </form>
-            {% endif %}
-            {% if remove_friend_clicked %}
-            <p>You have removed this user from your friend list.</p>
-            {% endif %}
-            {% endif %}
+                {% if friend_request and friend_request.from_user == profile.user %}
+                    <p>You have received a friend request from this user.</p>
+                    <form method="POST" action="{% url 'accept_friend_request' friend_request.id %}">
+                        {% csrf_token %}
+                        <button class="button is-success is-small" type="submit">Accept</button>
+                    </form>
+                    <form action="{% url 'deny_friend_request' friend_request.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="button is-danger is-small" type="submit">Deny</button>
+                    </form>
+                    {% endif %}
+                {% endwith %}
+                {% if not remove_friend_clicked %}
+                    <p>You are viewing your own profile.</p>
+                {% endif %}
+                {% if remove_friend_clicked %}
+                    <p>You have removed this user from your friend list.</p>
+                {% endif %}
             {% endif %}
         </div>
         <div class="media">
