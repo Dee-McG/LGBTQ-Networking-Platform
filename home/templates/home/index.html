@@ -34,6 +34,21 @@
           {% if profile.job_title %}
           {{profile.job_title}}
           {% endif %}
+          <span style="display:block;">Connections: {{request.user.profile.friends.count}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content">
+            <p class="title is-4 pb-3">Your Groups</p>
+            {% for group in groups %}
+            <p class="subtitle"><a href="{% url 'view_group' group.pk %}">{{group.group_name}}</a></p>
+            {% empty %}
+            <p class="subtitle">You are not part of any groups. <a href="{% url 'groups' %}">Explore Groups</a></p>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
