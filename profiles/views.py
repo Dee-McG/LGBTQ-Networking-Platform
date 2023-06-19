@@ -128,7 +128,7 @@ class EditProfile(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "edit_profile.html"
 
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
-        self.success_url = f'/profile/user/{self.kwargs["pk"]}/'yes
+        self.success_url = f'/profile/user/{self.kwargs["pk"]}/'
         return super().form_valid(form)
 
     def test_func(self):
