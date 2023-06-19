@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
 from profiles.models import Profile
-from posts.forms import PostForm
+from posts.forms import PostForm, PostCommentForm
 from posts.models import Post
 
 
@@ -20,7 +20,7 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
         # Filter posts to include only those from friends
         posts = Post.objects.filter(Q(author__profile__in=friends) | Q(author=profile.user)).order_by('-date_added')
-
+        context["comment_form"] = PostCommentForm()
         context["profile"] = profile
         context["form"] = PostForm()
         context["posts"] = posts
