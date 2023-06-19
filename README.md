@@ -1,5 +1,5 @@
 # Inclusinet
-![Mockup](docs/readme_imges/mockup.png)
+![Mockup](docs/readme_images/mockup.png)
 
 
 ## Introduction
@@ -19,39 +19,45 @@ Inclusinet is more than just an app, it's a movement, designed to create a world
 - Create Posts: As a user, I want to be able to create posts so that I can share my thoughts, experiences, professional achievements, and opportunities with others in the community.
 - Search: As a user, I want to be able to search for specific users, posts, or topics so that I can find relevant content or connections more easily within the community.
 - Groups: As a user, I can create group or join created groups
-- Add friends: As a user, I want to be a able to send requests to other users 
+- Add friends: As a user, I want to be a able to send requests to other users
+- Users can book a session via email with a Mentor by searching the experience that the mentor has.
 
 
 ## Features
 ### Home Page
-![Homepage](docs/readme_imges/homepage.png)
+![Homepage](docs/readme_imgaes/homepage.png)
 
 In the home page the user can view his posts and friend's post and the number of friends connection and the group name participation
 
 ### Login Page
-![Homepage](docs/readme_imges/login.png)
+![Homepage](docs/readme_images/login.png)
 
 In the login page the user needs to submit the username and password and can choose the remember me option
 
 ### Sign up Page
-![Signup](docs/readme_imges/signup.png)
+![Signup](docs/readme_images/signup.png)
 
 In the sign up page the user can register to our website by specifing username, mail and password. The login verification will be sent over the mail to verify the user access
 
 ### Edit profile page
-![Edit](docs/readme_imges/editprofile.png)
+![Edit](docs/readme_images/editprofile.png)
 
 Users can edit their profiles. They can specify their skills, Job title, Location and if they have a mentor or not. Also they can upload a profile picture 
 
 ### Groups page
-![groups](docs/readme_imges/groups.png)
+![groups](docs/readme_images/groups.png)
 
 Users can subscribe to the groups or create new groups
 
 ### Search page
-![search](docs/readme_imges/search.png)
+![search](docs/readme_images/search.png)
 
 Users can search for other friends to connect
+
+### Mentor page
+![mentors](docs/readme_images/mentor.png)
+
+Users can search for a mentrs skillset and send a request via email
 
 ## Technologies
 ### Languages Used
